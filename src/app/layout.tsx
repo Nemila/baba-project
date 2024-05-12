@@ -38,23 +38,25 @@ export default function RootLayout({
             fontSans.variable,
           )}
         >
-          <div className="space-x-4 p-4">
-            <Link href="/">Home</Link>
-            <Link href="/specialists">Specialists</Link>
-            <Link href="/dashboard/user">User Dashboard</Link>
-            <Link href="/dashboard/specialist">Specialist Dashboard</Link>
-            <Link href="/dashboard/admin">Admin Dashboard</Link>
+          <div className="container">
+            <nav className="space-x-4 p-4">
+              <Link href="/">Home</Link>
+              <Link href="/specialists">Specialists</Link>
+              <Link href="/dashboard/user">User Dashboard</Link>
+              <Link href="/dashboard/specialist">Specialist Dashboard</Link>
+              <Link href="/dashboard/admin">Admin Dashboard</Link>
 
-            <SignedIn>
-              <SignOutButton />
-            </SignedIn>
+              <SignedIn>
+                <SignOutButton />
+              </SignedIn>
 
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+            </nav>
+
+            {children}
           </div>
-
-          {children}
 
           <Toaster />
         </body>

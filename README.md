@@ -40,8 +40,8 @@ Breaking News (In case of dangerous illness in the region)
 - [ ] /register
 - [ ] /dashboard - Main dashboard showing upcoming appointments, suggestions, and notifications
 - [ ] /profile - User profile management page
-- [ ] /specialists - Listing all specialists with search and filter capabilities
-- [ ] /specialists/[id] - Specialist detail page
+- [x] /specialists - Listing all specialists with search and filter capabilities
+- [x] /specialists/[id] - Specialist detail page
 - [ ] /appointments/book - Appointment booking page
 - [ ] /appointments/view - View and manage upcoming and past appointments
 - [ ] /records - Manage and upload health documents
