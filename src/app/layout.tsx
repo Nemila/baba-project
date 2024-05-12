@@ -1,5 +1,11 @@
 import { Toaster } from "~/components/ui/toaster";
-import { ClerkProvider } from "@clerk/nextjs";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignOutButton,
+  SignedIn,
+  SignedOut,
+} from "@clerk/nextjs";
 import "~/styles/globals.css";
 
 import { Inter as FontSans } from "next/font/google";
@@ -38,7 +44,16 @@ export default function RootLayout({
             <Link href="/dashboard/user">User Dashboard</Link>
             <Link href="/dashboard/specialist">Specialist Dashboard</Link>
             <Link href="/dashboard/admin">Admin Dashboard</Link>
+
+            <SignedIn>
+              <SignOutButton />
+            </SignedIn>
+
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
           </div>
+
           {children}
 
           <Toaster />
