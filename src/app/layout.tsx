@@ -1,9 +1,11 @@
+import { Toaster } from "~/components/ui/toaster";
 import { ClerkProvider } from "@clerk/nextjs";
 import "~/styles/globals.css";
 
 import { Inter as FontSans } from "next/font/google";
 
 import { cn } from "~/lib/utils";
+import Link from "next/link";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -26,11 +28,20 @@ export default function RootLayout({
       <html lang="fr">
         <body
           className={cn(
-            "bg-background min-h-screen font-sans antialiased",
+            "min-h-screen bg-background font-sans antialiased",
             fontSans.variable,
           )}
         >
+          <div className="space-x-4 p-4">
+            <Link href="/">Home</Link>
+            <Link href="/specialists">Specialists</Link>
+            <Link href="/dashboard/user">User Dashboard</Link>
+            <Link href="/dashboard/specialist">Specialist Dashboard</Link>
+            <Link href="/dashboard/admin">Admin Dashboard</Link>
+          </div>
           {children}
+
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

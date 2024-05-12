@@ -54,7 +54,7 @@ Breaking News (In case of dangerous illness in the region)
 - [ ] SpecialistCard - Display specialist information in cards
 - [ ] AppointmentCard - Show brief details of appointments
 - [ ] UserProfileForm - Form component for updating user profile
-- [ ]SearchBar - For searching specialists and appointments
+- [ ] SearchBar - For searching specialists and appointments
 
 # Database Schema:
 
