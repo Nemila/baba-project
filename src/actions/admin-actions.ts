@@ -7,12 +7,12 @@ export const addNewSpecialist = async (formData: FormData) => {
   const data = Object.fromEntries(formData);
   try {
     const validatedData = newSpecialistValidator.parse(data);
-    const newSpecialist = await db.specialist.create({
+    await db.specialist.create({
       data: validatedData,
     });
-
-    return newSpecialist;
+    return { message: "Success" };
   } catch (error) {
     console.log(error);
+    return { message: "An error occured" };
   }
 };

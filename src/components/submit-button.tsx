@@ -9,7 +9,7 @@ const SubmitButton = ({ children }: { children: string }) => {
 
   return (
     <Button type="submit" disabled={pending}>
-      {children}
+      {!pending ? children : "Loading"}
       {pending && <Loader2 className="ml-4 h-4 w-4 animate-spin" />}
     </Button>
   );

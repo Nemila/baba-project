@@ -8,10 +8,36 @@ datasource db {
 }
 
 model Specialist {
-    id          Int    @id @default(autoincrement())
-    experience  Int
-    userId      String @unique
-    speciality  String
-    description String
-    rating      Float  @default(0)
+    id            Int            @id @default(autoincrement())
+    experience    Int
+    userId        String         @unique
+    speciality    String
+    description   String
+    rating        Float          @default(0)
+    createdAt     DateTime       @default(now())
+    updatedAt     DateTime       @updatedAt
+    appointements Appointement[]
+}
+
+enum AppointementStatus {
+    scheduled
+    completed
+    cancelled
+}
+
+enum AppointementType {
+    in_person
+    teleconsultation
+}
+
+model Appointement {
+    id              Int                @id @default(autoincrement())
+    userId          String
+    specialist      Specialist         @relation(fields: [specialistId], references: [id], onDelete: Cascade)
+    appointmentDate DateTime
+    status          AppointementStatus @default(scheduled)
+    type            AppointementType
+    createdAt       DateTime           @default(now())
+    updatedAt       DateTime           @updatedAt
+    specialistId    Int
 }

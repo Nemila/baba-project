@@ -50,8 +50,10 @@ const SpecialistCard = async ({ data }: Props) => {
         </div>
 
         <div className="flex flex-col-reverse">
-          <dt className="text-sm font-medium text-gray-600">Average Vote</dt>
-          <dd className="text-xs text-gray-500">{data.rating} / 10</dd>
+          <dt className="text-sm font-medium text-gray-600">Rating</dt>
+          <dd className="text-xs text-gray-500">
+            {data.rating.toFixed(1)} / 10
+          </dd>
         </div>
 
         <div className="flex flex-col-reverse">
