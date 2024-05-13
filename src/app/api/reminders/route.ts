@@ -18,6 +18,8 @@ export async function GET() {
 
     const senderEmail = "onboarding@resend.dev";
 
+    const ids = [];
+
     for (const appointment of appointments) {
       const user = await clerkClient.users.getUser(appointment.userId);
       if (!user.primaryEmailAddress?.emailAddress) continue;
@@ -37,8 +39,10 @@ export async function GET() {
         return Response.json({ error }, { status: 500 });
       }
 
-      return Response.json(data);
+      ids.push(data?.id);
     }
+
+    return Response.json({ message: "All done", data: ids });
   } catch (error) {
     return Response.json({ error }, { status: 500 });
   }

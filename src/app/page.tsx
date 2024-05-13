@@ -1,7 +1,11 @@
+import CreateMeeting from "~/components/create-meeting";
+
 export default function HomePage() {
   return (
     <main>
-      <h1>Hello World!</h1>
+      <p>Hello world</p>
+
+      <CreateMeeting />
     </main>
   );
 }

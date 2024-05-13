@@ -19,9 +19,7 @@ interface TwitchResetPasswordEmailProps {
   appointmentDate: Date;
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_URL
-  ? `https://${process.env.NEXT_PUBLIC_URL}`
-  : "";
+const baseUrl = process.env.NEXT_PUBLIC_URL;
 
 export const TwitchResetPasswordEmail = ({
   username,

@@ -9,11 +9,13 @@ export const env = createEnv({
       .default("development"),
     CLERK_SECRET_KEY: z.string(),
     RESEND_API_KEY: z.string(),
+    STREAM_VIDEO_SECRET: z.string(),
   },
 
   client: {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
     NEXT_PUBLIC_URL: z.string().url(),
+    NEXT_PUBLIC_STREAM_VIDEO_KEY: z.string(),
   },
 
   runtimeEnv: {
@@ -24,6 +26,8 @@ export const env = createEnv({
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
+    STREAM_VIDEO_SECRET: process.env.STREAM_VIDEO_SECRET,
+    NEXT_PUBLIC_STREAM_VIDEO_KEY: process.env.NEXT_PUBLIC_STREAM_VIDEO_KEY,
   },
 
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,

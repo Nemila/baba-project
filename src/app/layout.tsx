@@ -1,17 +1,19 @@
-import { Toaster } from "~/components/ui/toaster";
 import {
   ClerkProvider,
   SignInButton,
   SignOutButton,
   SignedIn,
   SignedOut,
+  UserButton,
 } from "@clerk/nextjs";
+import { Toaster } from "~/components/ui/toaster";
 import "~/styles/globals.css";
 
 import { Inter as FontSans } from "next/font/google";
 
-import { cn } from "~/lib/utils";
 import Link from "next/link";
+import { cn } from "~/lib/utils";
+import { StreamVideoProvider } from "~/providers/stream-video-provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -38,28 +40,31 @@ export default function RootLayout({
             fontSans.variable,
           )}
         >
-          <div className="container">
-            <nav className="space-x-4 p-4">
-              <Link href="/">Home</Link>
-              <Link href="/appointments/view">Appointments</Link>
-              <Link href="/specialists">Specialists</Link>
-              <Link href="/dashboard/user">User Dashboard</Link>
-              <Link href="/dashboard/specialist">Specialist Dashboard</Link>
-              <Link href="/dashboard/admin">Admin Dashboard</Link>
+          <StreamVideoProvider>
+            <div className="container">
+              <nav className="space-x-4 p-4">
+                <Link href="/">Home</Link>
+                <Link href="/appointments/view">Appointments</Link>
+                <Link href="/specialists">Specialists</Link>
+                <Link href="/dashboard/user">User Dashboard</Link>
+                <Link href="/dashboard/specialist">Specialist Dashboard</Link>
+                <Link href="/dashboard/admin">Admin Dashboard</Link>
 
-              <SignedIn>
-                <SignOutButton />
-              </SignedIn>
+                <SignedIn>
+                  <SignOutButton />
+                  <UserButton />
+                </SignedIn>
 
-              <SignedOut>
-                <SignInButton />
-              </SignedOut>
-            </nav>
+                <SignedOut>
+                  <SignInButton />
+                </SignedOut>
+              </nav>
 
-            {children}
-          </div>
+              {children}
+            </div>
 
-          <Toaster />
+            <Toaster />
+          </StreamVideoProvider>
         </body>
       </html>
     </ClerkProvider>
