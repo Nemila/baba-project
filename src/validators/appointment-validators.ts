@@ -6,3 +6,7 @@ export const newAppointmentValidator = z.object({
   type: z.enum(["in_person", "teleconsultation"]),
   specialistId: z.coerce.number(),
 });
+
+export const cancelAppointmentValidator = z.object({
+  appointmentId: z.coerce.number(),
+});

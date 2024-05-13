@@ -2,13 +2,15 @@
 
 import { Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
-import { Button } from "~/components/ui/button";
+import { Button, type ButtonProps } from "~/components/ui/button";
 
-const SubmitButton = ({ children }: { children: string }) => {
+type Props = ButtonProps;
+
+const SubmitButton = ({ children, ...rest }: Props) => {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="submit" disabled={pending}>
+    <Button type="submit" {...rest} disabled={pending}>
       {!pending ? children : "Loading"}
       {pending && <Loader2 className="ml-4 h-4 w-4 animate-spin" />}
     </Button>

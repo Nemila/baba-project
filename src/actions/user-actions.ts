@@ -1,8 +1,12 @@
 "use server";
 
 import { currentUser } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
 import { db } from "~/server/db";
-import { newAppointmentValidator } from "~/validators/appointment-validators";
+import {
+  cancelAppointmentValidator,
+  newAppointmentValidator,
+} from "~/validators/appointment-validators";
 
 export const bookAppointment = async (formData: FormData) => {
   const data = Object.fromEntries(formData);
@@ -43,7 +47,32 @@ export const bookAppointment = async (formData: FormData) => {
         },
       },
     });
+    revalidatePath("/dashboard");
+    return { message: "Success" };
+  } catch (error) {
+    console.log(error);
+    return { message: "Something went wrong" };
+  }
+};
 
+export const cancelAppointment = async (formData: FormData) => {
+  const data = Object.fromEntries(formData);
+
+  try {
+    const user = await currentUser();
+    if (!user) throw new Error("Not authorized");
+    const validatedData = cancelAppointmentValidator.parse(data);
+
+    await db.appointement.update({
+      where: {
+        id: validatedData.appointmentId,
+      },
+      data: {
+        status: "cancelled",
+      },
+    });
+
+    revalidatePath("/dashboard");
     return { message: "Success" };
   } catch (error) {
     console.log(error);

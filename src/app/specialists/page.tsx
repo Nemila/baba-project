@@ -9,6 +9,7 @@ const SpecialistsPage = async () => {
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
         Find a Specialist
       </h1>
+
       <div className="max-w-md space-y-4">
         {data.map((item) => (
           <SpecialistCard key={item.id} data={item} />
