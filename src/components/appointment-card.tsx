@@ -1,23 +1,27 @@
 import { clerkClient } from "@clerk/nextjs/server";
-import type { Prisma } from "@prisma/client";
+import type { Appointement } from "@prisma/client";
 import { Trash2 } from "lucide-react";
+import { notFound } from "next/navigation";
 import { cancelAppointment } from "~/actions/user-actions";
 import { Separator } from "~/components/ui/separator";
+import { db } from "~/server/db";
 import SubmitButton from "./submit-button";
 import { Badge } from "./ui/badge";
 
 type Props = {
-  data: Prisma.AppointementGetPayload<{
-    include: {
-      specialist: true;
-    };
-  }>;
+  data: Appointement;
 };
 
 const AppointmentCard = async ({ data }: Props) => {
-  const specialistUser = await clerkClient.users.getUser(
-    data.specialist.userId,
-  );
+  const specialist = await db.specialist.findUnique({
+    where: {
+      id: data.specialistId,
+    },
+  });
+
+  if (!specialist) return notFound();
+  const specialistUser = await clerkClient.users.getUser(specialist.userId);
+  const clientUser = await clerkClient.users.getUser(data.userId);
 
   return (
     <form
@@ -31,20 +35,39 @@ const AppointmentCard = async ({ data }: Props) => {
         name="appointmentId"
         required
       />
-      <div>
-        <p>{specialistUser.fullName}</p>
-        {/* <p>{specialistUser.primaryEmailAddress?.emailAddress}</p> */}
-        <p>{data.specialist.speciality}</p>
-      </div>
-      <Separator />
-      <div>
-        <p>Type: {data.type}</p>
 
-        <time dateTime={data.appointmentDate.toDateString()}>
+      <div>
+        <p className="font-medium">Specialist: {specialistUser.fullName}</p>
+        <p className="text-sm">{specialist.speciality}</p>
+      </div>
+
+      <Separator />
+
+      <div>
+        <p className="font-medium">Client: {clientUser.fullName}</p>
+        <p className="text-sm">
+          {clientUser.primaryEmailAddress?.emailAddress}
+        </p>
+      </div>
+
+      <Separator />
+
+      <div>
+        <time
+          className="font-medium"
+          dateTime={data.appointmentDate.toDateString()}
+        >
           {data.appointmentDate.toDateString()}
         </time>
+        <p className="text-sm">Type: {data.type}</p>
       </div>
-      <Badge className="uppercase">{data.status}</Badge>
+
+      <Badge
+        variant={data.status === "cancelled" ? "destructive" : "default"}
+        className="uppercase"
+      >
+        {data.status}
+      </Badge>
 
       <SubmitButton
         variant={"ghost"}

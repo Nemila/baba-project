@@ -11,8 +11,8 @@ const UserDashboard = async () => {
     where: {
       userId: user.id,
     },
-    include: {
-      specialist: true,
+    orderBy: {
+      appointmentDate: "asc",
     },
   });
 
