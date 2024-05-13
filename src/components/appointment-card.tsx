@@ -1,26 +1,23 @@
 import { clerkClient } from "@clerk/nextjs/server";
-import type { Appointement } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
 import { Trash2 } from "lucide-react";
-import { notFound } from "next/navigation";
 import { cancelAppointment } from "~/actions/user-actions";
 import { Separator } from "~/components/ui/separator";
-import { db } from "~/server/db";
 import SubmitButton from "./submit-button";
 import { Badge } from "./ui/badge";
 
 type Props = {
-  data: Appointement;
+  data: Prisma.AppointementGetPayload<{
+    include: {
+      specialist: true;
+    };
+  }>;
 };
 
 const AppointmentCard = async ({ data }: Props) => {
-  const specialist = await db.specialist.findUnique({
-    where: {
-      id: data.specialistId,
-    },
-  });
-
-  if (!specialist) return notFound();
-  const specialistUser = await clerkClient.users.getUser(specialist.userId);
+  const specialistUser = await clerkClient.users.getUser(
+    data.specialist.userId,
+  );
   const clientUser = await clerkClient.users.getUser(data.userId);
 
   return (
@@ -38,7 +35,7 @@ const AppointmentCard = async ({ data }: Props) => {
 
       <div>
         <p className="font-medium">Specialist: {specialistUser.fullName}</p>
-        <p className="text-sm">{specialist.speciality}</p>
+        <p className="text-sm">{data.specialist.speciality}</p>
       </div>
 
       <Separator />

@@ -42,7 +42,7 @@ Breaking News (In case of dangerous illness in the region)
 - [ ] /profile - User profile management page
 - [x] /specialists - Listing all specialists with search and filter capabilities
 - [x] /specialists/[id] - Specialist detail page
-- [ ] /appointments/book - Appointment booking page
+- [x] /appointments/book - Appointment booking page
 - [ ] /appointments/view - View and manage upcoming and past appointments
 - [ ] /records - Manage and upload health documents
 - [ ] /supports - Help and support center with FAQs and contact options

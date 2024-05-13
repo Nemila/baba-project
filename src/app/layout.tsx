@@ -41,6 +41,7 @@ export default function RootLayout({
           <div className="container">
             <nav className="space-x-4 p-4">
               <Link href="/">Home</Link>
+              <Link href="/appointments/view">Appointments</Link>
               <Link href="/specialists">Specialists</Link>
               <Link href="/dashboard/user">User Dashboard</Link>
               <Link href="/dashboard/specialist">Specialist Dashboard</Link>
