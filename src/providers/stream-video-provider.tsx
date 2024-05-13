@@ -29,7 +29,7 @@ const useInitializeClient = () => {
 
   useEffect(() => {
     if (!isLoaded) return;
-    if (!user?.id) throw new Error("Not authorized");
+    if (!user?.id) return;
 
     const streamUser: User = {
       id: user.id,
