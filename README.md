@@ -36,14 +36,14 @@ Breaking News (In case of dangerous illness in the region)
 
 ## Pages:
 
-- [ ] /login
-- [ ] /register
+- [x] /login
+- [x] /register
 - [ ] /dashboard - Main dashboard showing upcoming appointments, suggestions, and notifications
 - [ ] /profile - User profile management page
 - [x] /specialists - Listing all specialists with search and filter capabilities
 - [x] /specialists/[id] - Specialist detail page
 - [x] /appointments/book - Appointment booking page
-- [ ] /appointments/view - View and manage upcoming and past appointments
+- [x] /appointments/view - View and manage upcoming and past appointments
 - [ ] /records - Manage and upload health documents
 - [ ] /supports - Help and support center with FAQs and contact options
 
