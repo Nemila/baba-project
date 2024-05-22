@@ -1,14 +1,7 @@
-import {
-  ClerkProvider,
-  SignInButton,
-  SignOutButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
-import { Inter as FontSans } from "next/font/google";
-import Link from "next/link";
+import { Poppins as FontSans } from "next/font/google";
+import Navbar from "~/components/navbar";
 import { Toaster } from "~/components/ui/toaster";
 import { cn } from "~/lib/utils";
 import "~/styles/globals.css";
@@ -16,6 +9,7 @@ import "~/styles/globals.css";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata = {
@@ -34,33 +28,15 @@ export default function RootLayout({
       <html lang="fr">
         <body
           className={cn(
-            "min-h-screen bg-background font-sans antialiased",
+            "min-h-screen bg-background font-sans text-gray-800 antialiased",
             fontSans.variable,
           )}
         >
-          <div className="container">
-            <nav className="space-x-4 p-4">
-              <Link href="/">Home</Link>
-              <Link href="/appointments/view">Appointments</Link>
-              <Link href="/specialists">Specialists</Link>
-              <Link href="/dashboard/user">User Dashboard</Link>
-              <Link href="/dashboard/specialist">Specialist Dashboard</Link>
-              <Link href="/dashboard/admin">Admin Dashboard</Link>
-              <Link href="/diseases">Diseases</Link>
-
-              <SignedIn>
-                <SignOutButton />
-                <UserButton />
-              </SignedIn>
-
-              <SignedOut>
-                <SignInButton />
-              </SignedOut>
-            </nav>
-
-            {children}
-          </div>
-
+          <Navbar />
+          <div className="flex-1">{children}</div>
+          <footer className="border-t p-6 text-center text-xs">
+            <p>MaliMed All rights reserved | 2024 - 2025</p>
+          </footer>
           <Toaster />
         </body>
       </html>

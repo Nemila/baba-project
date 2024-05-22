@@ -39,7 +39,7 @@ const SpecialistCard = async ({ data }: Props) => {
 
       <div className="mt-4">
         <p className="line-clamp-2 text-pretty text-sm text-gray-500">
-          {data.description}
+          {data.speciality}
         </p>
       </div>
 
@@ -54,11 +54,6 @@ const SpecialistCard = async ({ data }: Props) => {
           <dd className="text-xs text-gray-500">
             {data.rating.toFixed(1)} / 10
           </dd>
-        </div>
-
-        <div className="flex flex-col-reverse">
-          <dt className="text-sm font-medium text-gray-600">Speciality</dt>
-          <dd className="text-xs text-gray-500">{data.speciality}</dd>
         </div>
       </dl>
     </Link>
