@@ -1,16 +1,13 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { type Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { useStreamVideoClient, type Call } from "@stream-io/video-react-sdk";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import Loading from "~/components/loading";
-import { Label } from "~/components/ui/label";
-import { Checkbox } from "~/components/ui/checkbox";
-import { Textarea } from "~/components/ui/textarea";
 import { Button } from "~/components/ui/button";
 import { useToast } from "~/components/ui/use-toast";
 import { env } from "~/env";
-import { Loader2 } from "lucide-react";
 
 const CreateMeeting = () => {
   const client = useStreamVideoClient();
@@ -34,13 +31,7 @@ const CreateMeeting = () => {
 
       const call = client.call("default", id);
 
-      await call.getOrCreate({
-        data: {
-          custom: {
-            description: descriptionValue,
-          },
-        },
-      });
+      await call.getOrCreate();
 
       setCall(call);
       setIsCreatingMeeting(false);
@@ -59,63 +50,12 @@ const CreateMeeting = () => {
         Welcome {user?.username}!
       </h1>
 
-      <div className="flex max-w-md flex-col gap-4 rounded-md bg-muted p-4">
-        <h2 className="text-2xl font-bold">Create a new meeting</h2>
-        <DescriptionInput
-          value={descriptionValue}
-          setDescriptionValue={setDescriptionValue}
-        />
-
-        <Button disabled={isCreatingMeeting} onClick={createMeeting}>
-          {isCreatingMeeting ? "Loading" : "Create Meeting"}
-          {isCreatingMeeting && (
-            <Loader2 className="ml-4 h-4 w-4 animate-spin" />
-          )}
-        </Button>
-      </div>
+      <Button disabled={isCreatingMeeting} onClick={createMeeting}>
+        {isCreatingMeeting ? "Loading" : "Create Meeting"}
+        {isCreatingMeeting && <Loader2 className="ml-4 h-4 w-4 animate-spin" />}
+      </Button>
 
       {call && <MeetingLink call={call} />}
-    </div>
-  );
-};
-
-interface DescriptionInputProps {
-  value: string;
-  setDescriptionValue: (value: string) => void;
-}
-
-const DescriptionInput = ({
-  value,
-  setDescriptionValue,
-}: DescriptionInputProps) => {
-  const [active, setActive] = useState(false);
-
-  return (
-    <div className="space-y-2">
-      <p className="text-lg font-medium">Meeting Info</p>
-
-      <Label htmlFor="description" className="flex items-center gap-2">
-        <Checkbox
-          id="description"
-          onCheckedChange={() => {
-            setActive((prev) => !prev);
-            setDescriptionValue("");
-          }}
-        />
-
-        <span>Add description</span>
-      </Label>
-
-      {active && (
-        <Label className="flex flex-col gap-2">
-          <span>Description</span>
-          <Textarea
-            value={value}
-            onChange={(e) => setDescriptionValue(e.currentTarget.value)}
-            maxLength={350}
-          ></Textarea>
-        </Label>
-      )}
     </div>
   );
 };

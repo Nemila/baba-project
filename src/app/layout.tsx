@@ -6,17 +6,13 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-import { Toaster } from "~/components/ui/toaster";
-import "~/styles/globals.css";
-
-import { Inter as FontSans } from "next/font/google";
-
-import Link from "next/link";
-import { cn } from "~/lib/utils";
-
 import "@stream-io/video-react-sdk/dist/css/styles.css";
-
+import { Inter as FontSans } from "next/font/google";
+import Link from "next/link";
+import { Toaster } from "~/components/ui/toaster";
+import { cn } from "~/lib/utils";
 import { StreamVideoProvider } from "~/providers/stream-video-provider";
+import "~/styles/globals.css";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -52,6 +48,7 @@ export default function RootLayout({
                 <Link href="/dashboard/user">User Dashboard</Link>
                 <Link href="/dashboard/specialist">Specialist Dashboard</Link>
                 <Link href="/dashboard/admin">Admin Dashboard</Link>
+                <Link href="/diseases">Diseases</Link>
 
                 <SignedIn>
                   <SignOutButton />

@@ -7,8 +7,9 @@ const NewSpecialistForm = () => {
   return (
     <form
       action={addNewSpecialist}
-      className="flex max-w-sm flex-col space-y-4"
+      className="flex max-w-sm flex-col gap-4 rounded-md border p-4 shadow-sm"
     >
+      <h2>Add New Specialist</h2>
       <Input type="text" name="userId" placeholder="User ID" required />
       <Input type="text" name="speciality" placeholder="Specialite" required />
       <Input
