@@ -11,7 +11,6 @@ import { Inter as FontSans } from "next/font/google";
 import Link from "next/link";
 import { Toaster } from "~/components/ui/toaster";
 import { cn } from "~/lib/utils";
-import { StreamVideoProvider } from "~/providers/stream-video-provider";
 import "~/styles/globals.css";
 
 const fontSans = FontSans({
@@ -39,32 +38,30 @@ export default function RootLayout({
             fontSans.variable,
           )}
         >
-          <StreamVideoProvider>
-            <div className="container">
-              <nav className="space-x-4 p-4">
-                <Link href="/">Home</Link>
-                <Link href="/appointments/view">Appointments</Link>
-                <Link href="/specialists">Specialists</Link>
-                <Link href="/dashboard/user">User Dashboard</Link>
-                <Link href="/dashboard/specialist">Specialist Dashboard</Link>
-                <Link href="/dashboard/admin">Admin Dashboard</Link>
-                <Link href="/diseases">Diseases</Link>
+          <div className="container">
+            <nav className="space-x-4 p-4">
+              <Link href="/">Home</Link>
+              <Link href="/appointments/view">Appointments</Link>
+              <Link href="/specialists">Specialists</Link>
+              <Link href="/dashboard/user">User Dashboard</Link>
+              <Link href="/dashboard/specialist">Specialist Dashboard</Link>
+              <Link href="/dashboard/admin">Admin Dashboard</Link>
+              <Link href="/diseases">Diseases</Link>
 
-                <SignedIn>
-                  <SignOutButton />
-                  <UserButton />
-                </SignedIn>
+              <SignedIn>
+                <SignOutButton />
+                <UserButton />
+              </SignedIn>
 
-                <SignedOut>
-                  <SignInButton />
-                </SignedOut>
-              </nav>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+            </nav>
 
-              {children}
-            </div>
+            {children}
+          </div>
 
-            <Toaster />
-          </StreamVideoProvider>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>
