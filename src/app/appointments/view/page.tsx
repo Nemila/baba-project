@@ -25,10 +25,11 @@ const AppointmentViewPage = async () => {
   });
 
   return (
-    <div className="space-y-4 p-4">
-      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-        Appointments View
-      </h1>
+    <div className="container flex flex-1 flex-col gap-6 px-4 py-8">
+      <div>
+        <h1 className="text-2xl font-black">Appointments</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {appointments.map((item) => (

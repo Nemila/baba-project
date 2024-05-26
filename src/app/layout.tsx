@@ -1,8 +1,8 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { Poppins as FontSans } from "next/font/google";
+import Footer from "~/components/footer";
 import Navbar from "~/components/navbar";
-import { Toaster } from "~/components/ui/toaster";
 import { cn } from "~/lib/utils";
 import "~/styles/globals.css";
 
@@ -25,19 +25,16 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="fr">
+      <html lang="fr" data-theme="light">
         <body
           className={cn(
-            "min-h-screen bg-background font-sans text-gray-800 antialiased",
+            "flex min-h-screen flex-col bg-base-100 font-sans antialiased",
             fontSans.variable,
           )}
         >
           <Navbar />
           <div className="flex-1">{children}</div>
-          <footer className="border-t p-6 text-center text-xs">
-            <p>MaliMed All rights reserved | 2024 - 2025</p>
-          </footer>
-          <Toaster />
+          <Footer />
         </body>
       </html>
     </ClerkProvider>

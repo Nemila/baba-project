@@ -1,10 +1,8 @@
 import { clerkClient } from "@clerk/nextjs/server";
 import type { Prisma } from "@prisma/client";
-import { Trash2 } from "lucide-react";
 import { cancelAppointment } from "~/actions/user-actions";
-import { Separator } from "~/components/ui/separator";
+import { cn } from "~/lib/utils";
 import SubmitButton from "./submit-button";
-import { Badge } from "./ui/badge";
 
 type Props = {
   data: Prisma.AppointementGetPayload<{
@@ -23,7 +21,7 @@ const AppointmentCard = async ({ data }: Props) => {
   return (
     <form
       action={cancelAppointment}
-      className="relative flex flex-col items-start gap-2 rounded-md border p-4 shadow-sm"
+      className="flex flex-col gap-2 rounded-md border bg-base-100 p-4 shadow-sm"
     >
       <input
         type="hidden"
@@ -33,12 +31,19 @@ const AppointmentCard = async ({ data }: Props) => {
         required
       />
 
+      <span
+        className={cn(
+          "badge badge-outline",
+          data.status === "cancelled" ? "badge-error" : "badge-primary",
+        )}
+      >
+        {data.status}
+      </span>
+
       <div>
         <p className="font-medium">Specialist: {specialistUser.fullName}</p>
         <p className="text-sm">{data.specialist.speciality}</p>
       </div>
-
-      <Separator />
 
       <div>
         <p className="font-medium">Client: {clientUser.fullName}</p>
@@ -46,8 +51,6 @@ const AppointmentCard = async ({ data }: Props) => {
           {clientUser.primaryEmailAddress?.emailAddress}
         </p>
       </div>
-
-      <Separator />
 
       <div>
         <time
@@ -59,19 +62,7 @@ const AppointmentCard = async ({ data }: Props) => {
         <p className="text-sm">Type: {data.type}</p>
       </div>
 
-      <Badge
-        variant={data.status === "cancelled" ? "destructive" : "default"}
-        className="uppercase"
-      >
-        {data.status}
-      </Badge>
-
-      <SubmitButton
-        variant={"ghost"}
-        className="absolute bottom-3 right-3 ml-auto"
-      >
-        Cancel <Trash2 className="ml-4 h-4 w-4" />
-      </SubmitButton>
+      <SubmitButton className="btn-outline mt-4">Cancel</SubmitButton>
     </form>
   );
 };

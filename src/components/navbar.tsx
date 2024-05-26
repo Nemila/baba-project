@@ -4,19 +4,9 @@ import {
   SignOutButton,
   SignedIn,
   SignedOut,
+  useUser,
 } from "@clerk/nextjs";
-import { Ellipsis, LogIn, LogOutIcon } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "~/components/ui/sheet";
-import { Button } from "./ui/button";
 
 const navLinks = [
   {
@@ -31,74 +21,84 @@ const navLinks = [
     href: "/diseases",
     label: "Diseases",
   },
+  {
+    href: "/dashboard/admin",
+    label: "Dashboard",
+    role: "admin",
+  },
+  {
+    href: "/dashboard/specialist",
+    label: "Dashboard",
+    role: "specialist",
+  },
 ];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleIsOpen = (v: boolean) => setIsOpen(v);
+  const { user } = useUser();
 
   return (
-    <nav className="flex h-16 items-center justify-center border-b bg-background">
-      <div className="container flex items-center justify-between p-4">
-        <Link href={"/"} className="text-xl font-semibold">
-          Mali
-          <span className="text-primary">Med</span>
-        </Link>
-
-        <div className="flex gap-2">
+    <div className="sticky left-0 top-0 z-50 flex h-16 items-center justify-center border-b bg-base-100">
+      <div className="container navbar">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+            >
+              {navLinks.map(
+                (item) =>
+                  (!item.role || item.role === user?.publicMetadata.role) && (
+                    <li key={item.label + item.href}>
+                      <Link href={item.href}>{item.label}</Link>
+                    </li>
+                  ),
+              )}
+            </ul>
+          </div>
+          <Link className="btn btn-ghost text-xl" href={"/"}>
+            MaliMed
+          </Link>
+        </div>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            {navLinks.map((item) => (
+              <li key={item.label}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="navbar-end">
           <SignedIn>
             <SignOutButton>
-              <Button size={"icon"} variant={"ghost"}>
-                <LogOutIcon className="h-4 w-4" />
-              </Button>
+              <button className="btn btn-primary">Sign Out</button>
             </SignOutButton>
           </SignedIn>
 
           <SignedOut>
             <SignInButton>
-              <Button size={"icon"} variant={"ghost"}>
-                <LogIn className="h-4 w-4" />
-              </Button>
+              <button className="btn btn-primary">Sign In</button>
             </SignInButton>
           </SignedOut>
-
-          <Sheet open={isOpen} onOpenChange={handleIsOpen}>
-            <SheetTrigger asChild>
-              <Button size={"icon"} variant={"outline"}>
-                <Ellipsis className="h-4 w-4" />
-              </Button>
-            </SheetTrigger>
-
-            <SheetContent className="flex w-full flex-col gap-4">
-              <SheetHeader>
-                <SheetTitle>MaliMed</SheetTitle>
-                <SheetDescription>Menu de navigation</SheetDescription>
-              </SheetHeader>
-
-              <div className="flex flex-col gap-1">
-                {navLinks.map((item) => (
-                  <Button
-                    key={item.label}
-                    variant={"ghost"}
-                    className="w-full justify-start"
-                    onClick={() => handleIsOpen(false)}
-                    asChild
-                  >
-                    <Link href={item.href}>{item.label}</Link>
-                  </Button>
-                ))}
-
-                <SignedIn></SignedIn>
-
-                <SignedOut>
-                  <SignInButton />
-                </SignedOut>
-              </div>
-            </SheetContent>
-          </Sheet>
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 

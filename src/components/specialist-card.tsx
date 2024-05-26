@@ -11,7 +11,7 @@ const SpecialistCard = async ({ data }: Props) => {
   return (
     <Link
       href={`/specialists/${data.id}`}
-      className="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8"
+      className="relative block overflow-hidden rounded-lg border border-gray-100 p-4 shadow-sm sm:p-6 lg:p-8"
     >
       <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
 
@@ -20,6 +20,10 @@ const SpecialistCard = async ({ data }: Props) => {
           <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
             {user.fullName}
           </h3>
+
+          <p className="mt-1 text-xs font-bold text-gray-600">
+            {data.speciality}
+          </p>
 
           <p className="mt-1 text-xs font-medium text-gray-600">
             {user.primaryEmailAddress?.emailAddress}
@@ -39,7 +43,10 @@ const SpecialistCard = async ({ data }: Props) => {
 
       <div className="mt-4">
         <p className="line-clamp-2 text-pretty text-sm text-gray-500">
-          {data.speciality}
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quia
+          hic id enim nulla minus ipsum consectetur, facilis, voluptates
+          possimus ab laboriosam accusantium nemo iure eum porro soluta?
+          Impedit, beatae?
         </p>
       </div>
 

@@ -1,19 +1,20 @@
-import { db } from "~/server/db";
+import DiseaseCard from "~/components/disease-card";
 
 const DiseasesPage = async () => {
-  const diseases = await db.disease.findMany();
-
   return (
-    <main>
-      <h2>Diseases</h2>
+    <div className="container flex flex-1 flex-col gap-6 px-4 py-8">
       <div>
-        {diseases.map((item) => (
-          <div key={item.id}>
-            <p>{item.name}</p>
-          </div>
-        ))}
+        <h1 className="text-2xl font-black">Diseases</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
       </div>
-    </main>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <DiseaseCard />
+        <DiseaseCard />
+        <DiseaseCard />
+        <DiseaseCard />
+      </div>
+    </div>
   );
 };
 

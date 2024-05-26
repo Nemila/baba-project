@@ -1,7 +1,5 @@
 import { addNewDisease } from "~/actions/admin-actions";
 import SubmitButton from "~/components/submit-button";
-import { Input } from "~/components/ui/input";
-import { Textarea } from "~/components/ui/textarea";
 
 const NewDiseaseForm = () => {
   return (
@@ -10,20 +8,42 @@ const NewDiseaseForm = () => {
       action={addNewDisease}
     >
       <h2>New Disease Form</h2>
-      <Input placeholder="Name" name="name" required />
-      <Textarea
+      <input
+        placeholder="Name"
+        name="name"
+        className="input input-bordered"
+        required
+      />
+      <textarea
         required
         name="description"
+        className="textarea textarea-bordered"
         placeholder="description"
-      ></Textarea>
-      <Textarea required name="causes" placeholder="causes"></Textarea>
-      <Textarea
+      ></textarea>
+      <textarea
+        required
+        name="causes"
+        className="textarea textarea-bordered"
+        placeholder="causes"
+      ></textarea>
+      <textarea
         required
         name="transmission"
+        className="textarea textarea-bordered"
         placeholder="transmission"
-      ></Textarea>
-      <Textarea required name="treatment" placeholder="treatment"></Textarea>
-      <Textarea required name="prevention" placeholder="prevention"></Textarea>
+      ></textarea>
+      <textarea
+        required
+        name="treatment"
+        className="textarea textarea-bordered"
+        placeholder="treatment"
+      ></textarea>
+      <textarea
+        required
+        name="prevention"
+        className="textarea textarea-bordered"
+        placeholder="prevention"
+      ></textarea>
       <SubmitButton>Submit</SubmitButton>
     </form>
   );
