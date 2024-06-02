@@ -1,11 +1,11 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
-import { DatePicker } from "~/components/date-picker";
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "~/components/ui/select";
+// import { DatePicker } from "~/components/date-picker";
 import { bookAppointment } from "~/actions/user-actions";
 import SubmitButton from "~/components/submit-button";
 
@@ -28,9 +28,9 @@ const BookPage = async ({ searchParams }: Props) => {
           value={searchParams.specialistId}
         />
 
-        <DatePicker />
+        {/* <DatePicker /> */}
 
-        <Select name="type">
+        {/* <Select name="type">
           <SelectTrigger>
             <SelectValue placeholder="Type" />
           </SelectTrigger>
@@ -38,7 +38,7 @@ const BookPage = async ({ searchParams }: Props) => {
             <SelectItem value="in_person">In Person</SelectItem>
             <SelectItem value="teleconsultation">Teleconsultation</SelectItem>
           </SelectContent>
-        </Select>
+        </Select> */}
 
         <SubmitButton>Submit</SubmitButton>
       </form>
