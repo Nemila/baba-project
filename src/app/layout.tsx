@@ -28,7 +28,7 @@ export default function RootLayout({
       <html lang="fr" data-theme="light">
         <body
           className={cn(
-            "flex min-h-screen flex-col bg-base-100 font-sans antialiased",
+            "bg-base-100 flex min-h-screen flex-col font-sans antialiased",
             fontSans.variable,
           )}
         >

@@ -41,7 +41,7 @@ export default async function HomePage() {
         <section className="flex flex-col gap-4">
           <header className="flex flex-col gap-2">
             <h4 className="text-lg font-semibold">Latest Diseases</h4>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-sm text-muted-foreground">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
               iste, maxime incidunt.
             </p>
@@ -58,7 +58,7 @@ export default async function HomePage() {
         <section className="flex flex-col gap-4">
           <header className="flex flex-col gap-2">
             <h4 className="text-lg font-semibold">Specialists</h4>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-sm text-muted-foreground">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
               iste, maxime incidunt.
             </p>
