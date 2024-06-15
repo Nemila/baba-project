@@ -10,30 +10,33 @@ const DiseaseDetailPage = () => {
   return (
     <div className="flex flex-1">
       <div className="container grid grid-cols-1 lg:grid-cols-12">
-        <div className="flex: space-y-2 pt-4 lg:hidden">
+        <div className="space-y-2 pt-4 lg:hidden">
           <h3 className="text-xl font-bold">Racourcis</h3>
 
           <div className="flex flex-col gap-1">
             <Button className="justify-start">
-              <a href="#">Description de la maladie</a>
+              <a href="#desc">Description de la maladie</a>
             </Button>
 
             <Button className="justify-start">
-              <a href="#">Causes de la maladie</a>
+              <a href="#causes">Causes de la maladie</a>
             </Button>
 
             <Button className="justify-start">
-              <a href="#">Moyens de transmission</a>
+              <a href="#transmission">Moyens de transmission</a>
             </Button>
 
             <Button className="justify-start">
-              <a href="#">Comment se proteger</a>
+              <a href="#prevent">Comment se proteger</a>
             </Button>
           </div>
         </div>
 
         <div className="col-span-8 py-6 lg:px-4">
-          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+          <h1
+            id="desc"
+            className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"
+          >
             Taxing Laughter: The Joke Tax Chronicles
           </h1>
 
@@ -43,7 +46,10 @@ const DiseaseDetailPage = () => {
             him with a problem: the kingdom was running out of money.
           </p>
 
-          <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+          <h2
+            id="causes"
+            className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
+          >
             The King&apos;s Plan
           </h2>
           <p className="leading-7 [&:not(:first-child)]:mt-6">
@@ -59,7 +65,10 @@ const DiseaseDetailPage = () => {
             quibusdam sequi voluptatum perspiciatis?
           </p>
 
-          <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+          <h2
+            id="transmission"
+            className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
+          >
             The King&apos;s Plan
           </h2>
           <p className="leading-7 [&:not(:first-child)]:mt-6">
@@ -69,7 +78,10 @@ const DiseaseDetailPage = () => {
             quibusdam sequi voluptatum perspiciatis?
           </p>
 
-          <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+          <h2
+            id="prevent"
+            className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
+          >
             The King&apos;s Plan
           </h2>
           <p className="leading-7 [&:not(:first-child)]:mt-6">
