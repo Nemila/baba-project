@@ -9,7 +9,7 @@ const SpecialistCard = async () => {
         <div className="flex items-center justify-between p-4">
           <div>
             <h3>Lamine Diamoutene</h3>
-            <p className="text-sm">Cardiologue</p>
+            <p className="text-sm">Cardiologie</p>
           </div>
 
           <figure className="size-16 overflow-hidden rounded-md">

@@ -9,7 +9,7 @@ import { Separator } from "~/components/ui/separator";
 const DiseaseDetailPage = () => {
   return (
     <div className="flex flex-1">
-      <div className="container grid grid-cols-1 lg:grid-cols-12">
+      <div className="container grid grid-cols-1 border-x bg-white lg:grid-cols-12">
         <div className="space-y-2 pt-4 lg:hidden">
           <h3 className="text-xl font-bold">Racourcis</h3>
 

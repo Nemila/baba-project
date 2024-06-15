@@ -1,25 +1,6 @@
-import { clerkClient } from "@clerk/nextjs/server";
 import Image from "next/image";
-import { notFound } from "next/navigation";
-import { db } from "~/server/db";
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
-
-const SpecialistDetails = async ({ params }: Props) => {
-  const id = Number(params.id);
-  if (isNaN(id)) return notFound();
-
-  const data = await db.specialist.findUnique({
-    where: { id },
-  });
-
-  if (!data) return notFound();
-  const user = await clerkClient.users.getUser(data.userId);
-
+const SpecialistDetails = async () => {
   return (
     <div className="container grid grid-cols-12 flex-col gap-4 px-4 py-8">
       <div className="col-span-4 flex flex-col gap-4">
@@ -28,14 +9,19 @@ const SpecialistDetails = async ({ params }: Props) => {
         <div className="flex items-center gap-4">
           <div className="avatar">
             <div className="w-24 rounded">
-              <Image src={user.imageUrl} width={500} height={500} alt="" />
+              <Image
+                src={`https://avatarfiles.alphacoders.com/375/375590.png`}
+                width={500}
+                height={500}
+                alt=""
+              />
             </div>
           </div>
 
           <div>
-            <p>{user.fullName}</p>
-            <p>{user.primaryEmailAddress?.emailAddress}</p>
-            <p>{data.speciality}</p>
+            <p>Lamine Diamoutene</p>
+            <p>pridila.2006@gmail.com</p>
+            <p>Cardiologie</p>
           </div>
         </div>
 
@@ -45,7 +31,7 @@ const SpecialistDetails = async ({ params }: Props) => {
             type="hidden"
             name="specialistId"
             contentEditable={false}
-            value={data.id}
+            value={`2`}
           />
           <button className="btn btn-primary w-full">Make Appointment</button>
         </form>

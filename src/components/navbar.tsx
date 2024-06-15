@@ -43,7 +43,7 @@ const Navbar = () => {
   }, [user?.publicMetadata?.role]);
 
   return (
-    <div className="flex h-16 w-full items-center justify-center border-b">
+    <div className="flex h-16 w-full items-center justify-center border-b bg-white">
       <div className="container flex items-center justify-between">
         <Link href="/" className="text-xl font-bold">
           MaliMed
