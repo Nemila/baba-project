@@ -3,6 +3,7 @@ import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { Poppins as FontSans } from "next/font/google";
 import Footer from "~/components/footer";
 import Navbar from "~/components/navbar";
+import { TooltipProvider } from "~/components/ui/tooltip";
 import { cn } from "~/lib/utils";
 import "~/styles/globals.css";
 
@@ -25,18 +26,20 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="fr" data-theme="light">
-        <body
-          className={cn(
-            "bg-base-100 flex min-h-screen flex-col font-sans antialiased",
-            fontSans.variable,
-          )}
-        >
-          <Navbar />
-          <div className="flex-1">{children}</div>
-          <Footer />
-        </body>
-      </html>
+      <TooltipProvider>
+        <html lang="fr">
+          <body
+            className={cn(
+              "flex min-h-screen flex-col bg-background font-sans antialiased",
+              fontSans.variable,
+            )}
+          >
+            <Navbar />
+            {children}
+            <Footer />
+          </body>
+        </html>
+      </TooltipProvider>
     </ClerkProvider>
   );
 }

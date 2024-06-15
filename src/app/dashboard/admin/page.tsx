@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import {
   ChevronLeft,
   ChevronRight,
@@ -19,6 +17,8 @@ import {
   Truck,
   Users2,
 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 import { Badge } from "~/components/ui/badge";
 import {
@@ -83,6 +83,7 @@ const Dashboard = () => {
             <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
             <span className="sr-only">Acme Inc</span>
           </Link>
+
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
@@ -95,6 +96,7 @@ const Dashboard = () => {
             </TooltipTrigger>
             <TooltipContent side="right">Dashboard</TooltipContent>
           </Tooltip>
+
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
@@ -107,6 +109,7 @@ const Dashboard = () => {
             </TooltipTrigger>
             <TooltipContent side="right">Orders</TooltipContent>
           </Tooltip>
+
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
@@ -236,6 +239,7 @@ const Dashboard = () => {
           </Breadcrumb>
           <div className="relative ml-auto flex-1 md:grow-0">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+
             <Input
               type="search"
               placeholder="Search..."

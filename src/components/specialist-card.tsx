@@ -1,68 +1,40 @@
-import { clerkClient } from "@clerk/nextjs/server";
-import type { Specialist } from "@prisma/client";
 import Image from "next/image";
+import { Card } from "./ui/card";
 import Link from "next/link";
 
-type Props = { data: Specialist };
-
-const SpecialistCard = async ({ data }: Props) => {
-  const user = await clerkClient.users.getUser(data.userId);
-
+const SpecialistCard = async () => {
   return (
-    <Link
-      href={`/specialists/${data.id}`}
-      className="relative block overflow-hidden rounded-lg border border-gray-100 p-4 shadow-sm sm:p-6 lg:p-8"
-    >
-      <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
+    <Link href={`/specialists/1`}>
+      <Card>
+        <div className="flex items-center justify-between p-4">
+          <div>
+            <h3>Lamine Diamoutene</h3>
+            <p className="text-sm">Cardiologue</p>
+          </div>
 
-      <div className="sm:flex sm:justify-between sm:gap-4">
-        <div>
-          <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
-            {user.fullName}
-          </h3>
-
-          <p className="mt-1 text-xs font-bold text-gray-600">
-            {data.speciality}
-          </p>
-
-          <p className="mt-1 text-xs font-medium text-gray-600">
-            {user.primaryEmailAddress?.emailAddress}
-          </p>
+          <figure className="size-16 overflow-hidden rounded-md">
+            <Image
+              alt=""
+              width={500}
+              height={500}
+              src={`https://avatarfiles.alphacoders.com/375/375590.png`}
+              className="h-full w-full object-cover"
+            />
+          </figure>
         </div>
 
-        <div className="hidden sm:block sm:shrink-0">
-          <Image
-            alt=""
-            width={64}
-            height={64}
-            src={user.imageUrl}
-            className="size-16 rounded-lg object-cover shadow-sm"
-          />
-        </div>
-      </div>
+        <div className="flex justify-between border-t p-4">
+          <div className="flex flex-col-reverse">
+            <p className="text-sm font-medium text-gray-600">Experience</p>
+            <p className="text-sm text-gray-500">10 ans</p>
+          </div>
 
-      <div className="mt-4">
-        <p className="line-clamp-2 text-pretty text-sm text-gray-500">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quia
-          hic id enim nulla minus ipsum consectetur, facilis, voluptates
-          possimus ab laboriosam accusantium nemo iure eum porro soluta?
-          Impedit, beatae?
-        </p>
-      </div>
-
-      <dl className="mt-6 flex gap-4 sm:gap-6">
-        <div className="flex flex-col-reverse">
-          <dt className="text-sm font-medium text-gray-600">Experience</dt>
-          <dd className="text-xs text-gray-500">{data.experience} Years</dd>
+          <div className="flex flex-col-reverse">
+            <p className="text-sm font-medium text-gray-600">Note</p>
+            <p className="text-sm text-gray-500">9.4 / 10</p>
+          </div>
         </div>
-
-        <div className="flex flex-col-reverse">
-          <dt className="text-sm font-medium text-gray-600">Rating</dt>
-          <dd className="text-xs text-gray-500">
-            {data.rating.toFixed(1)} / 10
-          </dd>
-        </div>
-      </dl>
+      </Card>
     </Link>
   );
 };

@@ -7,6 +7,7 @@ import {
   useUser,
 } from "@clerk/nextjs";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const navLinks = [
   {
@@ -34,18 +35,30 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const { user } = useUser();
+  const [role, setRole] = useState(user?.publicMetadata?.role ?? "");
+
+  useEffect(() => {
+    setRole(user?.publicMetadata?.role ?? "");
+  }, [user?.publicMetadata?.role]);
+
   return (
-    <div className="flex items-center justify-center p-4">
+    <div className="flex h-16 w-full items-center justify-center border-b">
       <div className="container flex items-center justify-between">
         <Link href="/" className="text-xl font-bold">
           MaliMed
         </Link>
+
         <div className="flex items-center justify-center gap-4 text-sm">
-          {navLinks.map((navLink, index) => (
-            <Link href={navLink.href} key={`${navLink.label}-${index}`}>
-              {navLink.label}
-            </Link>
-          ))}
+          {navLinks.map(
+            (navLink, index) =>
+              (!navLink.role || navLink.role === role) && (
+                <Link href={navLink.href} key={`${navLink.label}-${index}`}>
+                  {navLink.label}
+                </Link>
+              ),
+          )}
+
           <SignedOut>
             <SignInButton />
           </SignedOut>
