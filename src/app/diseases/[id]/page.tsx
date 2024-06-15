@@ -1,4 +1,4 @@
-import { Calendar, ExternalLink, Facebook, Twitter } from "lucide-react";
+import { Calendar, ExternalLink, Facebook } from "lucide-react";
 import Image from "next/image";
 import DiseaseCard from "~/components/disease-card";
 import { Badge } from "~/components/ui/badge";
@@ -9,8 +9,30 @@ import { Separator } from "~/components/ui/separator";
 const DiseaseDetailPage = () => {
   return (
     <div className="flex flex-1">
-      <div className="container grid grid-cols-12">
-        <div className="col-span-8 px-4 py-6">
+      <div className="container grid grid-cols-1 lg:grid-cols-12">
+        <div className="flex: space-y-2 pt-4 lg:hidden">
+          <h3 className="text-xl font-bold">Racourcis</h3>
+
+          <div className="flex flex-col gap-1">
+            <Button className="justify-start">
+              <a href="#">Description de la maladie</a>
+            </Button>
+
+            <Button className="justify-start">
+              <a href="#">Causes de la maladie</a>
+            </Button>
+
+            <Button className="justify-start">
+              <a href="#">Moyens de transmission</a>
+            </Button>
+
+            <Button className="justify-start">
+              <a href="#">Comment se proteger</a>
+            </Button>
+          </div>
+        </div>
+
+        <div className="col-span-8 py-6 lg:px-4">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Taxing Laughter: The Joke Tax Chronicles
           </h1>
@@ -64,21 +86,21 @@ const DiseaseDetailPage = () => {
           </p>
         </div>
 
-        <aside className="relative col-span-4 h-full border-l">
-          <div className="space-y-2 p-4">
+        <aside className="relative col-span-4 h-full space-y-4 border-t py-4 lg:border-l lg:border-t-0 lg:p-4">
+          <div className="space-y-2">
             <h3 className="text-xl font-bold">Concernant l&apos;article</h3>
 
-            <Card className="flex flex-col gap-4">
+            <Card className="flex flex-col">
               <div className="flex items-center justify-between p-4">
                 <div className="space-y-1">
                   <h3>Lamine Diamoutene</h3>
                   <div className="flex items-center gap-4">
                     <p className="text-sm">Cardiologue</p>
-                    <Badge className="rounded-md">Auteur</Badge>
+                    <Badge className="rounded-lg">Auteur</Badge>
                   </div>
                 </div>
 
-                <figure className="size-16 overflow-hidden rounded-md">
+                <figure className="size-16 overflow-hidden rounded-lg">
                   <Image
                     alt=""
                     width={500}
@@ -99,14 +121,6 @@ const DiseaseDetailPage = () => {
                   href="#"
                   className="ml-auto flex items-center gap-2 text-sm hover:underline"
                 >
-                  <Twitter className="h-4 w-4" />
-                  <span>Twitter</span>
-                </a>
-
-                <a
-                  href="#"
-                  className="flex items-center gap-2 text-sm hover:underline"
-                >
                   <Facebook className="h-4 w-4" />
                   <span>Facebook</span>
                 </a>
@@ -114,33 +128,34 @@ const DiseaseDetailPage = () => {
             </Card>
           </div>
 
-          <Separator />
+          <div className="hidden flex-col space-y-2 lg:flex">
+            <Separator />
 
-          <div className="space-y-2 p-4">
-            <h3 className="text-xl font-bold">Racourcis</h3>
+            <div className="space-y-2">
+              <h3 className="text-xl font-bold">Racourcis</h3>
 
-            <div className="flex flex-col gap-1">
-              <Button className="justify-start">
-                <a href="#">Description de la maladie</a>
-              </Button>
+              <div className="flex flex-col gap-1">
+                <Button className="justify-start">
+                  <a href="#">Description de la maladie</a>
+                </Button>
 
-              <Button className="justify-start">
-                <a href="#">Causes de la maladie</a>
-              </Button>
+                <Button className="justify-start">
+                  <a href="#">Causes de la maladie</a>
+                </Button>
 
-              <Button className="justify-start">
-                <a href="#">Moyens de transmission</a>
-              </Button>
+                <Button className="justify-start">
+                  <a href="#">Moyens de transmission</a>
+                </Button>
 
-              <Button className="justify-start">
-                <a href="#">Comment se proteger</a>
-              </Button>
+                <Button className="justify-start">
+                  <a href="#">Comment se proteger</a>
+                </Button>
+              </div>
             </div>
           </div>
-
           <Separator />
 
-          <div className="space-y-2 p-4">
+          <div className="space-y-2">
             <h3 className="text-xl font-bold">D&apos;autres articles</h3>
 
             <div className="flex flex-col gap-4">
@@ -151,7 +166,7 @@ const DiseaseDetailPage = () => {
 
           <Separator />
 
-          <div className="space-y-2 p-4">
+          <div className="space-y-2">
             <h3 className="text-xl font-bold">Sources</h3>
 
             <div className="flex flex-col gap-2">

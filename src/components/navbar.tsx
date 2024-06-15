@@ -49,7 +49,7 @@ const Navbar = () => {
           MaliMed
         </Link>
 
-        <div className="flex items-center justify-center gap-4 text-sm">
+        <div className="hidden items-center justify-center gap-4 text-sm md:flex">
           {navLinks.map(
             (navLink, index) =>
               (!navLink.role || navLink.role === role) && (

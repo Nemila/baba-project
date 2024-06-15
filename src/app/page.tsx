@@ -2,14 +2,10 @@ import DiseaseCard from "~/components/disease-card";
 import SpecialistCard from "~/components/specialist-card";
 
 export default async function HomePage() {
-  // const specialists = await db.specialist.findMany({
-  //   take: 4,
-  // });
-
   return (
     <main className="flex-1 py-4">
       <div className="container flex flex-col gap-6">
-        <section className="space-y-4">
+        <section className="space-y-2">
           <h4 className="text-xl font-semibold">Latest Diseases</h4>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
             <DiseaseCard />
@@ -19,7 +15,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="space-y-4">
+        <section className="space-y-2">
           <h4 className="text-xl font-semibold">Specialists</h4>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
             <SpecialistCard />
