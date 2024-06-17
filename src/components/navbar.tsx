@@ -21,7 +21,7 @@ import { Separator } from "./ui/separator";
 
 const navLinks = [
   {
-    href: "/appointments/view",
+    href: "/appointments",
     label: "Appointments",
   },
   {

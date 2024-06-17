@@ -1,27 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
-import { cn } from "~/lib/utils";
+import { Button } from "./ui/button";
 
-type Props = {
-  children: any;
-  className?: string;
-};
-
-const SubmitButton = ({ children, className }: Props) => {
+const SubmitButton = ({ children,  }: ) => {
   const { pending } = useFormStatus();
 
   return (
-    <button
-      type="submit"
-      className={cn("btn btn-primary", className)}
-      disabled={pending}
-    >
+    <Button type="submit" disabled={pending}>
       {!pending ? children : "Loading"}
       {pending && <Loader2 className="ml-4 h-4 w-4 animate-spin" />}
-    </button>
+    </Button>
   );
 };
 

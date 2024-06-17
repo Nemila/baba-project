@@ -1,69 +1,63 @@
-import { clerkClient } from "@clerk/nextjs/server";
-import type { Prisma } from "@prisma/client";
-import { cancelAppointment } from "~/actions/user-actions";
-import { cn } from "~/lib/utils";
-import SubmitButton from "./submit-button";
+import {
+  AtSign,
+  Calendar,
+  Hospital,
+  Stethoscope,
+  UserRound,
+} from "lucide-react";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 
-type Props = {
-  data: Prisma.AppointementGetPayload<{
-    include: {
-      specialist: true;
-    };
-  }>;
-};
-
-const AppointmentCard = async ({ data }: Props) => {
-  const specialistUser = await clerkClient.users.getUser(
-    data.specialist.userId,
-  );
-  const clientUser = await clerkClient.users.getUser(data.userId);
-
+const AppointmentCard = async () => {
   return (
-    <form
-      action={cancelAppointment}
-      className="flex flex-col gap-2 rounded-md border bg-base-100 p-4 shadow-sm"
-    >
-      <input
-        type="hidden"
-        contentEditable={false}
-        value={data.id}
-        name="appointmentId"
-        required
-      />
+    <Card>
+      <CardHeader>
+        <Badge className="h-8 rounded-md">En Attente</Badge>
+      </CardHeader>
+      <CardContent>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <p className="flex items-center gap-2">
+              <UserRound className="h-5 w-5" />
+              <span>Lamine Diamoutene</span>
+            </p>
 
-      <span
-        className={cn(
-          "badge badge-outline",
-          data.status === "cancelled" ? "badge-error" : "badge-primary",
-        )}
-      >
-        {data.status}
-      </span>
+            <p className="flex items-center gap-2">
+              <AtSign className="h-5 w-5" />
+              <span>pridila1@gmail.com</span>
+            </p>
 
-      <div>
-        <p className="font-medium">Specialist: {specialistUser.fullName}</p>
-        <p className="text-sm">{data.specialist.speciality}</p>
-      </div>
+            <p className="flex items-center gap-2">
+              <Stethoscope className="h-5 w-5" />
+              <span>Cardiologie</span>
+            </p>
 
-      <div>
-        <p className="font-medium">Client: {clientUser.fullName}</p>
-        <p className="text-sm">
-          {clientUser.primaryEmailAddress?.emailAddress}
-        </p>
-      </div>
+            <p className="flex items-center gap-2">
+              <Hospital className="h-5 w-5" />
+              <span>Seattle, Washington, États-Unis</span>
+            </p>
 
-      <div>
-        <time
-          className="font-medium"
-          dateTime={data.appointmentDate.toDateString()}
-        >
-          {data.appointmentDate.toDateString()}
-        </time>
-        <p className="text-sm">Type: {data.type}</p>
-      </div>
+            <p className="flex items-center gap-2">
+              <Calendar className="h-5 w-5" />
+              <span>10/17/2024 a 16h25</span>
+            </p>
+          </div>
+        </div>
+        {/* 
+        <div>
+          <p>Client: John Doe</p>
+          <p>pridila.2006@gmail.com</p>
+          <time>06/17/2024</time>
+        </div> */}
+      </CardContent>
 
-      <SubmitButton className="btn-outline mt-4">Cancel</SubmitButton>
-    </form>
+      <CardFooter>
+        <Button variant={"outline"} className="w-full">
+          Annuler reservation
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 
