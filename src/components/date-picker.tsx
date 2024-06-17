@@ -25,6 +25,7 @@ export function DatePicker() {
         value={date?.toISOString()}
         contentEditable={false}
       />
+
       <Popover>
         <PopoverTrigger asChild>
           <Button

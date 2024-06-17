@@ -1,5 +1,6 @@
 import { Calendar, ExternalLink, Facebook } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import DiseaseCard from "~/components/disease-card";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
@@ -138,6 +139,10 @@ const DiseaseDetailPage = () => {
                 </a>
               </div>
             </Card>
+
+            <Button asChild className="w-full" variant={"ghost"}>
+              <Link href="/specialists/1">Voir Profile</Link>
+            </Button>
           </div>
 
           <div className="hidden flex-col space-y-2 lg:flex">
@@ -147,19 +152,19 @@ const DiseaseDetailPage = () => {
               <h3 className="text-xl font-bold">Racourcis</h3>
 
               <div className="flex flex-col gap-1">
-                <Button className="justify-start">
+                <Button className="justify-start" asChild>
                   <a href="#">Description de la maladie</a>
                 </Button>
 
-                <Button className="justify-start">
+                <Button className="justify-start" asChild>
                   <a href="#">Causes de la maladie</a>
                 </Button>
 
-                <Button className="justify-start">
+                <Button className="justify-start" asChild>
                   <a href="#">Moyens de transmission</a>
                 </Button>
 
-                <Button className="justify-start">
+                <Button className="justify-start" asChild>
                   <a href="#">Comment se proteger</a>
                 </Button>
               </div>
@@ -181,21 +186,34 @@ const DiseaseDetailPage = () => {
           <div className="space-y-2">
             <h3 className="text-xl font-bold">Sources</h3>
 
-            <div className="flex flex-col gap-2">
-              <a href="#" className="flex items-center gap-2 hover:underline">
-                <ExternalLink className="h-4 w-4" />
-                <span>Some random source 1</span>
-              </a>
+            <div className="flex flex-col items-start gap-2">
+              <Button variant={"link"} className="h-fit p-0" asChild>
+                <a href="#">
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Some random source 1
+                </a>
+              </Button>
 
-              <a href="#" className="flex items-center gap-2 hover:underline">
-                <ExternalLink className="h-4 w-4" />
-                <span>Some random source 2</span>
-              </a>
+              <Button variant={"link"} className="h-fit p-0" asChild>
+                <a href="#">
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Some random source 2
+                </a>
+              </Button>
 
-              <a href="#" className="flex items-center gap-2 hover:underline">
-                <ExternalLink className="h-4 w-4" />
-                <span>Some random source 3</span>
-              </a>
+              <Button variant={"link"} className="h-fit p-0" asChild>
+                <a href="#">
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Some random source 3
+                </a>
+              </Button>
+
+              <Button variant={"link"} className="h-fit p-0" asChild>
+                <a href="#">
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Some random source 4
+                </a>
+              </Button>
             </div>
           </div>
         </aside>
