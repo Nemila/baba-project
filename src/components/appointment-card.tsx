@@ -8,6 +8,17 @@ import {
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "~/components/ui/alert-dialog";
 
 const AppointmentCard = async () => {
   return (
@@ -53,9 +64,27 @@ const AppointmentCard = async () => {
       </CardContent>
 
       <CardFooter>
-        <Button variant={"outline"} className="w-full">
-          Annuler reservation
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant={"outline"} className="w-full">
+              Annuler reservation
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Etes vous absolument sur?</AlertDialogTitle>
+              <AlertDialogDescription>
+                Etes vous sur de vouloir annuler ce rendez-vous?
+                L&apos;annulation a repetition des rendez-vous peut conduire a
+                des sanctions graves.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Retour</AlertDialogCancel>
+              <AlertDialogAction>Je Suis Sur</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </CardFooter>
     </Card>
   );
