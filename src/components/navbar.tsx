@@ -6,17 +6,17 @@ import {
   SignedOut,
   useUser,
 } from "@clerk/nextjs";
-import { Bell, CheckCheck } from "lucide-react";
+import { Bell, CheckCheck, PanelRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
-
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
+import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
 import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 
 const navLinks = [
@@ -76,10 +76,40 @@ const Navbar = () => {
           <SignedIn>
             <SignOutButton />
           </SignedIn>
+        </div>
+
+        <div className="flex items-center justify-center gap-4 text-sm">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                size={"icon"}
+                variant={"outline"}
+                className="flex md:hidden"
+              >
+                <PanelRight className="h-4 w-4" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="flex flex-col">
+              <nav className="grid gap-2 text-lg font-medium">
+                {navLinks.map(
+                  (navLink, index) =>
+                    (!navLink.role || navLink.role === role) && (
+                      <Link
+                        href={navLink.href}
+                        key={`${navLink.label}-${index}`}
+                        className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                      >
+                        {navLink.label}
+                      </Link>
+                    ),
+                )}
+              </nav>
+            </SheetContent>
+          </Sheet>
 
           <Popover>
             <PopoverTrigger asChild>
-              <Button size={"icon"}>
+              <Button size={"icon"} variant={"outline"}>
                 <Bell className="h-4 w-4" />
               </Button>
             </PopoverTrigger>
