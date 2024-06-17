@@ -1,58 +1,43 @@
 import { Search } from "lucide-react";
 import SpecialistCard from "~/components/specialist-card";
-import { db } from "~/server/db";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 
 const SpecialistsPage = async () => {
-  const data = await db.specialist.findMany();
-
   return (
     <div className="container flex flex-1 flex-col gap-6 px-4 py-8">
-      <div className="flex flex-wrap gap-4">
-        <label className="input input-bordered flex flex-1 items-center gap-4">
-          <Search className="h-5 w-5 shrink-0" />
-          <input
-            type="text"
-            placeholder="Search specialist"
-            className="flex-1"
-          />
-        </label>
-
-        <label className="input input-bordered flex flex-1 items-center gap-4">
-          <input
-            type="number"
-            placeholder="Min year experience..."
-            className="flex-1"
-          />
-        </label>
-
-        <label className="input input-bordered flex flex-1 items-center gap-4">
-          <input
-            type="number"
-            placeholder="Max year experience..."
-            className="flex-1"
-          />
-        </label>
-
-        <label className="input input-bordered flex flex-1 items-center gap-4">
-          <input type="number" placeholder="Min rating" className="flex-1" />
-        </label>
-
-        <label className="input input-bordered flex flex-1 items-center gap-4">
-          <input type="number" placeholder="Max rating" className="flex-1" />
-        </label>
-
-        <button className="btn btn-primary flex-1">Search</button>
+      <div className="flex flex-col gap-4 md:flex-row">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 shrink-0 -translate-y-1/2" />
+          <Input type="text" placeholder="Recherche" className="pl-9" />
+        </div>
+        <Input
+          type="number"
+          min={1}
+          placeholder="Annees d'experience min"
+          className="flex-1"
+        />
+        <Input type="number" min={1} placeholder="Note" className="flex-1" />
+        <Button className="flex-1">Chercher</Button>
       </div>
 
       <div>
-        <h1 className="text-2xl font-black">Specialists</h1>
+        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+          Liste des specialists
+        </h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {[...data, ...data, ...data, ...data, ...data, ...data].map((item) => (
-          <SpecialistCard key={item.id} data={item} />
-        ))}
+        <SpecialistCard />
+        <SpecialistCard />
+        <SpecialistCard />
+        <SpecialistCard />
+        <SpecialistCard />
+        <SpecialistCard />
+        <SpecialistCard />
+        <SpecialistCard />
+        <SpecialistCard />
       </div>
     </div>
   );

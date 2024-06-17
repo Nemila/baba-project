@@ -6,18 +6,18 @@ import {
   SignedOut,
   useUser,
 } from "@clerk/nextjs";
+import { Bell, CheckCheck } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { Bell, Check, CheckCheck } from "lucide-react";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
-import { Separator } from "./ui/separator";
 import { Badge } from "./ui/badge";
+import { Separator } from "./ui/separator";
 
 const navLinks = [
   {
