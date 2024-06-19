@@ -1,4 +1,3 @@
-import React from "react";
 import { DatePicker } from "~/components/date-picker";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -23,7 +22,7 @@ import { Textarea } from "~/components/ui/textarea";
   </SelectContent>
 </Select>;
 
-const MedicalDetailsPage = () => {
+const MedicalDetailsPage = async () => {
   return (
     <div className="flex-1 py-6">
       <div className="mx-auto flex max-w-[1000px] flex-col gap-8 overflow-hidden rounded-md border bg-white p-6">
