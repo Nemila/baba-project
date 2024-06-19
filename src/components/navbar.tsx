@@ -33,7 +33,7 @@ const navLinks = [
     label: "Maladies",
   },
   {
-    href: "/dashboard/admin",
+    href: "/dashboard",
     label: "Tableau de bord",
     role: "admin",
   },
