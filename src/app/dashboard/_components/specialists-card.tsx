@@ -28,11 +28,7 @@ import {
 } from "~/components/ui/dialog";
 import { Input } from "~/components/ui/input";
 
-type Props = {
-  users: string;
-};
-
-const SpecialistsCard = ({ users }: Props) => {
+const SpecialistsCard = ({ users }: { users: string }) => {
   const [allUsers, setAllUsers] = useState<User[]>([]);
 
   const [userListModalOpen, setUserListModalOpen] = useState(false);
@@ -78,10 +74,7 @@ const SpecialistsCard = ({ users }: Props) => {
                   <DialogTrigger asChild>
                     <Button variant={"outline"} className="justify-start">
                       <UserRound className="mr-2 h-4 w-4" />
-                      {selectedUser.trim()
-                        ? allUsers.find((item) => item.id === selectedUser)
-                            ?.emailAddresses[0]?.emailAddress
-                        : "Utilisateur"}
+                      {selectedUser.trim() ? selectedUser : "Utilisateur"}
                     </Button>
                   </DialogTrigger>
 
@@ -94,14 +87,13 @@ const SpecialistsCard = ({ users }: Props) => {
                           {allUsers.map((item) => (
                             <CommandItem
                               key={item.id}
-                              value={item.id}
+                              value={item.emailAddresses[0]?.emailAddress}
                               onSelect={(value) => {
                                 setSelectedUser(value);
                                 setUserListModalOpen(false);
                               }}
                             >
-                              {item.emailAddresses[0]?.emailAddress ??
-                                item.username}
+                              {item.emailAddresses[0]?.emailAddress}
                             </CommandItem>
                           ))}
                         </CommandGroup>
