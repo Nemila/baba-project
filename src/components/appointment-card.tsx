@@ -1,3 +1,4 @@
+"use client";
 import {
   AtSign,
   Calendar,
@@ -5,27 +6,22 @@ import {
   Stethoscope,
   UserRound,
 } from "lucide-react";
+import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "~/components/ui/alert-dialog";
+import AppointmentCardActionButton from "./appointment-card-action-button";
 
-const AppointmentCard = async () => {
+const latitude = 38.9419;
+const longitude = -78.302;
+
+const AppointmentCard = () => {
   return (
     <Card>
       <CardHeader>
         <Badge className="h-8 rounded-md">En Attente</Badge>
       </CardHeader>
+
       <CardContent>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
@@ -53,38 +49,28 @@ const AppointmentCard = async () => {
               <Calendar className="h-5 w-5" />
               <span>10/17/2024 a 16h25</span>
             </p>
+
+            <Button variant={"link"} className="mt-2 h-fit w-fit p-0" asChild>
+              <Link href={`/medical-details/1`}>Voir la fiche medicale</Link>
+            </Button>
           </div>
         </div>
-        {/* 
-        <div>
-          <p>Client: John Doe</p>
-          <p>pridila.2006@gmail.com</p>
-          <time>06/17/2024</time>
-        </div> */}
       </CardContent>
 
-      <CardFooter>
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button variant={"outline"} className="w-full">
-              Annuler reservation
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Etes vous absolument sur?</AlertDialogTitle>
-              <AlertDialogDescription>
-                Etes vous sur de vouloir annuler ce rendez-vous?
-                L&apos;annulation a repetition des rendez-vous peut conduire a
-                des sanctions graves.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Retour</AlertDialogCancel>
-              <AlertDialogAction>Je Suis Sur</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+      <CardFooter className="gap-4">
+        <Button className="flex-1" asChild>
+          <a href="#">Google Meet</a>
+        </Button>
+
+        <Button className="flex-1" variant={"outline"} asChild>
+          <a
+            href={`http://maps.google.com/maps?z=12&t=k&q=loc:${latitude}+${longitude}`}
+          >
+            Google Map
+          </a>
+        </Button>
+
+        <AppointmentCardActionButton />
       </CardFooter>
     </Card>
   );
