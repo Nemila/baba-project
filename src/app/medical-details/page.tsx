@@ -26,7 +26,7 @@ import { Textarea } from "~/components/ui/textarea";
 const MedicalDetailsPage = () => {
   return (
     <div className="flex-1 py-6">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-8 overflow-hidden rounded-md bg-white p-6">
+      <div className="mx-auto flex max-w-[1000px] flex-col gap-8 overflow-hidden rounded-md border bg-white p-6">
         <div>
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Fiche Medical
@@ -38,18 +38,18 @@ const MedicalDetailsPage = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
+        <div className="grid grid-cols-2 gap-6">
+          <Label className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <span>Nom Complet</span>
             <Input placeholder="Ecrivez ici..." />
           </Label>
 
-          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
+          <Label className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <span>Date de naissance</span>
             <DatePicker limit={false} />
           </Label>
 
-          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
+          <Label className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <span>Genre</span>
             <Select>
               <SelectTrigger>
@@ -62,12 +62,12 @@ const MedicalDetailsPage = () => {
             </Select>
           </Label>
 
-          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
+          <Label className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <span>Numero de telephone</span>
             <Input placeholder="Ecrivez ici..." />
           </Label>
 
-          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
+          <Label className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <span>Est ce que vous fumez?</span>
             <Select>
               <SelectTrigger>
@@ -80,7 +80,7 @@ const MedicalDetailsPage = () => {
             </Select>
           </Label>
 
-          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
+          <Label className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <span>Est ce que vous buvez?</span>
             <Select>
               <SelectTrigger>
@@ -93,7 +93,7 @@ const MedicalDetailsPage = () => {
             </Select>
           </Label>
 
-          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
+          <Label className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <span>Pratiquez vous du sport?</span>
             <Select>
               <SelectTrigger>
@@ -106,7 +106,7 @@ const MedicalDetailsPage = () => {
             </Select>
           </Label>
 
-          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
+          <Label className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <span>Avez vous deja ete hospitalise?</span>
             <Select>
               <SelectTrigger>
@@ -119,17 +119,17 @@ const MedicalDetailsPage = () => {
             </Select>
           </Label>
 
-          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
+          <Label className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <span>Avez vous des allergies?</span>
             <Textarea placeholder="Decrivez vos allergies si vous en avez..."></Textarea>
           </Label>
 
-          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
+          <Label className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <span>Avez vous des conditions chroniques ?</span>
             <Textarea placeholder="Exemple: Diabetes, hypertension etc..."></Textarea>
           </Label>
 
-          <div className="col-span-2 space-y-4">
+          <div className="col-span-2 space-y-3">
             <p className="text-sm">
               Vous pourrez modifier les informations sur cette page a
               n&apos;importe quel moment.
