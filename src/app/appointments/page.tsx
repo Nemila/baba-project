@@ -10,7 +10,7 @@ const AppointmentViewPage = async () => {
     <div className="container flex flex-1 flex-col gap-6 px-4 py-8">
       <div>
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-          Gestion des rendez-vous
+          Gestion des Consultations
         </h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
       </div>

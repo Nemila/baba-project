@@ -6,7 +6,7 @@ import {
   SignedOut,
   useUser,
 } from "@clerk/nextjs";
-import { Bell, CheckCheck, PanelRight } from "lucide-react";
+import { Bell, CheckCheck, PanelRight, UserRound } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
@@ -22,25 +22,20 @@ import { Separator } from "./ui/separator";
 const navLinks = [
   {
     href: "/appointments",
-    label: "Appointments",
+    label: "Consultations",
   },
   {
     href: "/specialists",
-    label: "Specialists",
+    label: "Specialistes",
   },
   {
     href: "/diseases",
-    label: "Diseases",
+    label: "Maladies",
   },
   {
     href: "/dashboard/admin",
-    label: "Admin",
+    label: "Tableau de bord",
     role: "admin",
-  },
-  {
-    href: "/dashboard/specialist",
-    label: "Specialist",
-    role: "specialist",
   },
 ];
 
@@ -70,15 +65,47 @@ const Navbar = () => {
           )}
 
           <SignedOut>
-            <SignInButton />
+            <SignInButton>Se Connecter</SignInButton>
           </SignedOut>
 
           <SignedIn>
-            <SignOutButton />
+            <SignOutButton>Se Deconnecter</SignOutButton>
           </SignedIn>
         </div>
 
-        <div className="flex items-center justify-center gap-4 text-sm">
+        <div className="flex items-center justify-center gap-2">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button size={"icon"} variant={"outline"}>
+                <Bell className="h-4 w-4" />
+              </Button>
+            </PopoverTrigger>
+
+            <PopoverContent className="space-y-2 p-4" align="end">
+              <div className="flex items-center justify-between">
+                <h4>Notifications</h4>
+
+                <Button size={"icon"}>
+                  <CheckCheck className="h-4 w-4" />
+                </Button>
+              </div>
+
+              <Separator />
+
+              <div className="flex flex-col gap-2">
+                <NotificationMessage />
+                <NotificationMessage />
+                <NotificationMessage />
+              </div>
+            </PopoverContent>
+          </Popover>
+
+          <Button asChild variant={"outline"} size={"icon"}>
+            <Link href="/medical-details">
+              <UserRound className="h-4 w-4" />
+            </Link>
+          </Button>
+
           <Sheet>
             <SheetTrigger asChild>
               <Button
@@ -106,31 +133,6 @@ const Navbar = () => {
               </nav>
             </SheetContent>
           </Sheet>
-
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button size={"icon"} variant={"outline"}>
-                <Bell className="h-4 w-4" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="space-y-2 p-4" align="end">
-              <div className="flex items-center justify-between">
-                <h4>Notifications</h4>
-
-                <Button size={"icon"} variant={"outline"}>
-                  <CheckCheck className="h-4 w-4" />
-                </Button>
-              </div>
-
-              <Separator />
-
-              <div className="flex flex-col gap-2">
-                <NotificationMessage />
-                <NotificationMessage />
-                <NotificationMessage />
-              </div>
-            </PopoverContent>
-          </Popover>
         </div>
       </div>
     </div>
@@ -141,9 +143,9 @@ const NotificationMessage = () => {
   return (
     <Link
       href={"/"}
-      className="flex flex-col items-start gap-2 rounded-md border p-2 hover:bg-muted"
+      className="flex flex-col items-start gap-2 rounded-md  p-2 hover:border hover:bg-muted/40"
     >
-      <Badge className="text-xs" variant={"destructive"}></Badge>
+      <Badge className="text-xs"></Badge>
       <p className="line-clamp-2 text-xs">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
         placeat deleniti quaerat expedita laboriosam, natus perferendis, soluta
