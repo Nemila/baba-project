@@ -39,17 +39,17 @@ const MedicalDetailsPage = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <Label className="flex flex-col gap-2">
+          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
             <span>Nom Complet</span>
             <Input placeholder="Ecrivez ici..." />
           </Label>
 
-          <Label className="flex flex-col gap-2">
+          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
             <span>Date de naissance</span>
-            <DatePicker />
+            <DatePicker limit={false} />
           </Label>
 
-          <Label className="flex flex-col gap-2">
+          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
             <span>Genre</span>
             <Select>
               <SelectTrigger>
@@ -62,12 +62,12 @@ const MedicalDetailsPage = () => {
             </Select>
           </Label>
 
-          <Label className="flex flex-col gap-2">
+          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
             <span>Numero de telephone</span>
             <Input placeholder="Ecrivez ici..." />
           </Label>
 
-          <Label className="flex flex-col gap-2">
+          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
             <span>Est ce que vous fumez?</span>
             <Select>
               <SelectTrigger>
@@ -80,7 +80,7 @@ const MedicalDetailsPage = () => {
             </Select>
           </Label>
 
-          <Label className="flex flex-col gap-2">
+          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
             <span>Est ce que vous buvez?</span>
             <Select>
               <SelectTrigger>
@@ -93,7 +93,7 @@ const MedicalDetailsPage = () => {
             </Select>
           </Label>
 
-          <Label className="flex flex-col gap-2">
+          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
             <span>Pratiquez vous du sport?</span>
             <Select>
               <SelectTrigger>
@@ -106,7 +106,7 @@ const MedicalDetailsPage = () => {
             </Select>
           </Label>
 
-          <Label className="flex flex-col gap-2">
+          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
             <span>Avez vous deja ete hospitalise?</span>
             <Select>
               <SelectTrigger>
@@ -119,18 +119,18 @@ const MedicalDetailsPage = () => {
             </Select>
           </Label>
 
-          <Label className="flex flex-col gap-2">
+          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
             <span>Avez vous des allergies?</span>
             <Textarea placeholder="Decrivez vos allergies si vous en avez..."></Textarea>
           </Label>
 
-          <Label className="flex flex-col gap-2">
+          <Label className="col-span-2 flex flex-col gap-2 md:col-span-1">
             <span>Avez vous des conditions chroniques ?</span>
             <Textarea placeholder="Exemple: Diabetes, hypertension etc..."></Textarea>
           </Label>
 
           <div className="col-span-2 space-y-4">
-            <p>
+            <p className="text-sm">
               Vous pourrez modifier les informations sur cette page a
               n&apos;importe quel moment.
             </p>

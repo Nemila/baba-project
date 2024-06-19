@@ -13,7 +13,11 @@ import {
 } from "~/components/ui/popover";
 import { CalendarDays } from "lucide-react";
 
-export function DatePicker() {
+type Props = {
+  limit?: boolean;
+};
+
+export function DatePicker({ limit = true }: Props) {
   const [date, setDate] = React.useState<Date>();
 
   return (
@@ -45,7 +49,7 @@ export function DatePicker() {
             selected={date}
             onSelect={setDate}
             initialFocus
-            fromDate={new Date()}
+            fromDate={limit ? new Date() : undefined}
             toDate={addDays(new Date(), 31)}
             required
           />
