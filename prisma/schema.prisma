@@ -8,38 +8,38 @@ datasource db {
 }
 
 model Specialist {
-    id            Int            @id @default(autoincrement())
-    experience    Int
-    userId        String         @unique
-    speciality    String
-    description   String
-    rating        Float          @default(0)
-    appointements Appointement[]
-    createdAt     DateTime       @default(now())
-    updatedAt     DateTime       @updatedAt
+    id           Int           @id @default(autoincrement())
+    experience   Int
+    userId       String        @unique
+    speciality   String
+    description  String?
+    rating       Float         @default(0)
+    appointments Appointment[]
+    createdAt    DateTime      @default(now())
+    updatedAt    DateTime      @updatedAt
 }
 
-enum AppointementStatus {
+enum AppointmentStatus {
     scheduled
     completed
     cancelled
 }
 
-enum AppointementType {
+enum AppointmentType {
     in_person
     teleconsultation
 }
 
-model Appointement {
-    id              Int                @id @default(autoincrement())
+model Appointment {
+    id              Int               @id @default(autoincrement())
     userId          String
-    specialist      Specialist         @relation(fields: [specialistId], references: [id], onDelete: Cascade)
+    specialist      Specialist        @relation(fields: [specialistId], references: [id], onDelete: Cascade)
     specialistId    Int
     appointmentDate DateTime
-    status          AppointementStatus @default(scheduled)
-    type            AppointementType
-    createdAt       DateTime           @default(now())
-    updatedAt       DateTime           @updatedAt
+    status          AppointmentStatus @default(scheduled)
+    type            AppointmentType
+    createdAt       DateTime          @default(now())
+    updatedAt       DateTime          @updatedAt
 }
 
 model Disease {

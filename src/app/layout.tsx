@@ -1,22 +1,17 @@
-import {
-  ClerkProvider,
-  SignInButton,
-  SignOutButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
-import { Inter as FontSans } from "next/font/google";
-import Link from "next/link";
-import { Toaster } from "~/components/ui/toaster";
+import { Poppins as FontSans } from "next/font/google";
+import Footer from "~/components/footer";
+import Navbar from "~/components/navbar";
+import { TooltipProvider } from "~/components/ui/tooltip";
 import { cn } from "~/lib/utils";
-import { StreamVideoProvider } from "~/providers/stream-video-provider";
 import "~/styles/globals.css";
+import { Toaster } from "~/components/ui/toaster";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata = {
@@ -32,41 +27,21 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="fr">
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable,
-          )}
-        >
-          <StreamVideoProvider>
-            <div className="container">
-              <nav className="space-x-4 p-4">
-                <Link href="/">Home</Link>
-                <Link href="/appointments/view">Appointments</Link>
-                <Link href="/specialists">Specialists</Link>
-                <Link href="/dashboard/user">User Dashboard</Link>
-                <Link href="/dashboard/specialist">Specialist Dashboard</Link>
-                <Link href="/dashboard/admin">Admin Dashboard</Link>
-                <Link href="/diseases">Diseases</Link>
-
-                <SignedIn>
-                  <SignOutButton />
-                  <UserButton />
-                </SignedIn>
-
-                <SignedOut>
-                  <SignInButton />
-                </SignedOut>
-              </nav>
-
-              {children}
-            </div>
-
+      <TooltipProvider>
+        <html lang="fr">
+          <body
+            className={cn(
+              "flex min-h-screen flex-col bg-muted/90 font-sans antialiased",
+              fontSans.variable,
+            )}
+          >
+            <Navbar />
+            {children}
+            <Footer />
             <Toaster />
-          </StreamVideoProvider>
-        </body>
-      </html>
+          </body>
+        </html>
+      </TooltipProvider>
     </ClerkProvider>
   );
 }

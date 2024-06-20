@@ -1,78 +1,78 @@
-import { clerkClient } from "@clerk/nextjs/server";
-import type { Prisma } from "@prisma/client";
-import { Trash2 } from "lucide-react";
-import { cancelAppointment } from "~/actions/user-actions";
-import { Separator } from "~/components/ui/separator";
-import SubmitButton from "./submit-button";
+"use client";
+import {
+  AtSign,
+  Calendar,
+  Hospital,
+  MapPin,
+  Stethoscope,
+  UserRound,
+} from "lucide-react";
+import AppointmentCardActionButton from "./appointment-card-action-button";
 import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 
-type Props = {
-  data: Prisma.AppointementGetPayload<{
-    include: {
-      specialist: true;
-    };
-  }>;
-};
+const latitude = 38.9419;
+const longitude = -78.302;
 
-const AppointmentCard = async ({ data }: Props) => {
-  const specialistUser = await clerkClient.users.getUser(
-    data.specialist.userId,
-  );
-  const clientUser = await clerkClient.users.getUser(data.userId);
-
+const AppointmentCard = () => {
   return (
-    <form
-      action={cancelAppointment}
-      className="relative flex flex-col items-start gap-2 rounded-md border p-4 shadow-sm"
-    >
-      <input
-        type="hidden"
-        contentEditable={false}
-        value={data.id}
-        name="appointmentId"
-        required
-      />
+    <Card>
+      <CardHeader>
+        <Badge className="h-8 rounded-md">En Attente</Badge>
+      </CardHeader>
 
-      <div>
-        <p className="font-medium">Specialist: {specialistUser.fullName}</p>
-        <p className="text-sm">{data.specialist.speciality}</p>
-      </div>
+      <CardContent>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <p className="flex items-center gap-2">
+              <UserRound className="h-5 w-5" />
+              <span>Lamine Diamoutene</span>
+            </p>
 
-      <Separator />
+            <p className="flex items-center gap-2">
+              <AtSign className="h-5 w-5" />
+              <span>pridila1@gmail.com</span>
+            </p>
 
-      <div>
-        <p className="font-medium">Client: {clientUser.fullName}</p>
-        <p className="text-sm">
-          {clientUser.primaryEmailAddress?.emailAddress}
-        </p>
-      </div>
+            <p className="flex items-center gap-2">
+              <Stethoscope className="h-5 w-5" />
+              <span>Cardiologie</span>
+            </p>
 
-      <Separator />
+            <p className="flex items-center gap-2">
+              <Hospital className="h-5 w-5" />
+              <span>Seattle, Washington, États-Unis</span>
+            </p>
 
-      <div>
-        <time
-          className="font-medium"
-          dateTime={data.appointmentDate.toDateString()}
-        >
-          {data.appointmentDate.toDateString()}
-        </time>
-        <p className="text-sm">Type: {data.type}</p>
-      </div>
+            <p className="flex items-center gap-2">
+              <Calendar className="h-5 w-5" />
+              <span>10/17/2024 a 16h25</span>
+            </p>
 
-      <Badge
-        variant={data.status === "cancelled" ? "destructive" : "default"}
-        className="uppercase"
-      >
-        {data.status}
-      </Badge>
+            <Button variant={"link"} className="mt-2 h-fit w-fit p-0" asChild>
+              <a href="#">Voir la fiche medicale</a>
+            </Button>
+          </div>
+        </div>
+      </CardContent>
 
-      <SubmitButton
-        variant={"ghost"}
-        className="absolute bottom-3 right-3 ml-auto"
-      >
-        Cancel <Trash2 className="ml-4 h-4 w-4" />
-      </SubmitButton>
-    </form>
+      <CardFooter className="gap-4">
+        <Button className="flex-1" asChild>
+          <a href="#">Google Meet</a>
+        </Button>
+
+        <Button variant={"outline"} size={"icon"} asChild>
+          <a
+            href={`http://maps.google.com/maps?z=12&t=k&q=loc:${latitude}+${longitude}`}
+          >
+            <MapPin className="h-4 w-4" />
+          </a>
+        </Button>
+
+        <AppointmentCardActionButton />
+      </CardFooter>
+    </Card>
   );
 };
 
