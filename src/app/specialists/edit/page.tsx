@@ -28,12 +28,7 @@ const SpecialistEditPage = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-6">
-          <Label className="col-span-2 flex flex-col gap-3 md:col-span-1">
-            <span>Annees D&apos;experience</span>
-            <Input type="number" placeholder="Ecrivez ici..." />
-          </Label>
-
-          <Label className="col-span-2 flex flex-col gap-3 md:col-span-1">
+          <Label className="col-span-2 flex flex-col gap-3">
             <span>Specialite</span>
             <Input placeholder="Ecrivez ici..." />
           </Label>
