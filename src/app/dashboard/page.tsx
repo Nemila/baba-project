@@ -1,4 +1,6 @@
 import { clerkClient } from "@clerk/nextjs/server";
+import { UserRound } from "lucide-react";
+import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -7,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import UsersTable from "~/components/users-table";
 import SpecialistsCard from "./_components/specialists-card";
 
@@ -25,40 +26,28 @@ const Dashboard = async () => {
             >
               <SpecialistsCard users={JSON.stringify(users.data)} />
 
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardDescription>Total utilisateurs</CardDescription>
-                  <CardTitle className="text-4xl">500</CardTitle>
-                </CardHeader>
-                <CardFooter className="flex gap-2">
-                  <Button className="w-full" variant={"outline"}>
-                    Voir Tout
-                  </Button>
-                </CardFooter>
-              </Card>
-
               <Card x-chunk="dashboard-05-chunk-2">
                 <CardHeader className="pb-2">
                   <CardDescription>Maladies repertories</CardDescription>
                   <CardTitle className="text-4xl">5000</CardTitle>
                 </CardHeader>
                 <CardFooter className="flex gap-2">
-                  <Button className="w-full" variant={"outline"}>
-                    Voir Tout
+                  <Button className="w-full" variant={"outline"} asChild>
+                    <Link href={`/diseases`}>Voir Tout</Link>
                   </Button>
                 </CardFooter>
               </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <UserRound className="h-8 w-8" />
+                  <CardDescription>Total utilisateurs</CardDescription>
+                  <CardTitle className="text-4xl">500</CardTitle>
+                </CardHeader>
+              </Card>
             </div>
 
-            <Tabs defaultValue="users">
-              <TabsList>
-                <TabsTrigger value="users">Utilisateurs</TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="users">
-                <UsersTable users={JSON.stringify(users.data)} />
-              </TabsContent>
-            </Tabs>
+            <UsersTable users={JSON.stringify(users.data)} />
           </div>
         </main>
       </div>

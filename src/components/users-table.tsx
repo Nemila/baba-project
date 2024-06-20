@@ -48,15 +48,14 @@ const UsersTable = ({ users }: { users: string }) => {
           <TableHeader>
             <TableRow>
               <TableHead>Utilisateur</TableHead>
-              <TableHead className="hidden sm:table-cell">Role</TableHead>
+              <TableHead>Role</TableHead>
               <TableHead className="hidden sm:table-cell">
                 Nom Complet
               </TableHead>
               <TableHead className="hidden sm:table-cell">
                 Numero de telephone
               </TableHead>
-              <TableHead className="text-right">Derniere Connexion</TableHead>
-              <TableHead></TableHead>
+              <TableHead className="text-right">Action</TableHead>
             </TableRow>
           </TableHeader>
 
@@ -102,9 +101,7 @@ const UserRow = ({ item }: { item: User }) => {
         </div>
       </TableCell>
 
-      <TableCell className="hidden sm:table-cell">
-        {(item.publicMetadata?.role as string) ?? "Default"}
-      </TableCell>
+      <TableCell>{(item.publicMetadata?.role as string) ?? "user"}</TableCell>
 
       <TableCell className="hidden sm:table-cell">
         {item.fullName ?? "N/A"}
@@ -112,12 +109,6 @@ const UserRow = ({ item }: { item: User }) => {
 
       <TableCell className="hidden sm:table-cell">
         {item.phoneNumbers[0]?.phoneNumber ?? "N/A"}
-      </TableCell>
-
-      <TableCell className="text-right">
-        {item.lastActiveAt
-          ? new Date(item.lastActiveAt).toLocaleDateString()
-          : "N/A"}
       </TableCell>
 
       <TableCell className="text-right">

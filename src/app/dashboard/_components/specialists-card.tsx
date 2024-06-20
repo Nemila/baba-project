@@ -1,6 +1,7 @@
 "use client";
 import type { User } from "@clerk/nextjs/server";
 import { Loader2, Plus, UserRound } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -77,8 +78,8 @@ const SpecialistsCard = ({ users }: { users: string }) => {
         <CardTitle className="text-4xl">200</CardTitle>
       </CardHeader>
       <CardFooter className="flex gap-2">
-        <Button className="w-full" variant={"outline"}>
-          Voir Tout
+        <Button className="w-full" variant={"outline"} asChild>
+          <Link href={`/specialists`}>Voir Tout</Link>
         </Button>
 
         <Dialog>
