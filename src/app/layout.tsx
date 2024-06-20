@@ -1,5 +1,4 @@
 import { ClerkProvider } from "@clerk/nextjs";
-import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { Poppins as FontSans } from "next/font/google";
 import Footer from "~/components/footer";
 import Navbar from "~/components/navbar";
