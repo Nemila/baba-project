@@ -14,6 +14,9 @@ model Specialist {
     speciality   String
     description  String?
     rating       Float         @default(0)
+    isFeatured   Boolean       @default(false)
+    location     Json?
+    socialLinks  Json?
     appointments Appointment[]
     createdAt    DateTime      @default(now())
     updatedAt    DateTime      @updatedAt

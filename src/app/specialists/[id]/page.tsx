@@ -2,9 +2,9 @@ import {
   ArrowDownWideNarrow,
   Calendar,
   Clock,
+  Edit,
   Hospital,
   Send,
-  Star,
   ThumbsDown,
   ThumbsUp,
   TriangleAlert,
@@ -79,8 +79,11 @@ const SpecialistDetails = async () => {
                     </DialogContent>
                   </Dialog>
 
-                  <Button>
-                    Noter <Star className="ml-2 h-4 w-4" />
+                  <Button asChild>
+                    <Link href={`/specialists/edit`}>
+                      <Edit className="mr-2 h-4 w-4" />
+                      Editer
+                    </Link>
                   </Button>
                 </div>
               </div>

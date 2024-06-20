@@ -28,7 +28,7 @@ const MedicalDetailsPage = async () => {
       <div className="mx-auto flex max-w-[1000px] flex-col gap-8 overflow-hidden rounded-md border bg-white p-6">
         <div>
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-            Fiche Medical
+            Fiche Medicale
           </h1>
           <p className="leading-7 [&:not(:first-child)]:mt-2">
             Les docteurs utiliseront les informations que vous aurez renseigne
