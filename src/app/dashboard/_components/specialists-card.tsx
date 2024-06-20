@@ -1,6 +1,6 @@
 "use client";
 import type { User } from "@clerk/nextjs/server";
-import { Plus, UserRound } from "lucide-react";
+import { Loader2, Plus, UserRound } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -27,12 +27,16 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Input } from "~/components/ui/input";
+import { useToast } from "~/components/ui/use-toast";
+import { addSpecialist } from "~/lib/actions";
 
 const SpecialistsCard = ({ users }: { users: string }) => {
+  const { toast } = useToast();
   const [allUsers, setAllUsers] = useState<User[]>([]);
 
   const [userListModalOpen, setUserListModalOpen] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState("");
   const [speciality, setSpeciality] = useState("");
   const [experience, setExperience] = useState(0);
@@ -40,6 +44,31 @@ const SpecialistsCard = ({ users }: { users: string }) => {
   useEffect(() => {
     setAllUsers(JSON.parse(users) as User[]);
   }, [users]);
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+
+    const user = allUsers.find(
+      (item) => item.emailAddresses[0]?.emailAddress === selectedUser,
+    );
+    if (!user) return;
+    const data = { userId: user.id, speciality, experience };
+
+    try {
+      await addSpecialist(data);
+      toast({
+        title: "Specialiste Ajoute",
+      });
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Un probleme est survenu",
+        variant: "destructive",
+      });
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Card>
@@ -115,7 +144,12 @@ const SpecialistsCard = ({ users }: { users: string }) => {
                   onChange={(e) => setExperience(Number(e.currentTarget.value))}
                 />
 
-                <Button>Ajouter</Button>
+                <Button onClick={handleSubmit} disabled={isLoading}>
+                  {isLoading && (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  )}
+                  Ajouter
+                </Button>
               </div>
             </DialogHeader>
           </DialogContent>

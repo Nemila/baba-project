@@ -6,6 +6,7 @@ import Navbar from "~/components/navbar";
 import { TooltipProvider } from "~/components/ui/tooltip";
 import { cn } from "~/lib/utils";
 import "~/styles/globals.css";
+import { Toaster } from "~/components/ui/toaster";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -37,6 +38,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Footer />
+            <Toaster />
           </body>
         </html>
       </TooltipProvider>
