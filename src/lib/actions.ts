@@ -20,8 +20,14 @@ export const addSpecialist = async (data: {
   speciality: string;
   experience: number;
 }) => {
+  const user = await clerkClient.users.getUser(data.userId);
+
   await db.specialist.create({
-    data: data,
+    data: {
+      ...data,
+      fullName:
+        user.fullName ?? user.username ?? user.emailAddresses[0]!.emailAddress,
+    },
   });
   revalidatePath("/dashboard");
 };
@@ -54,16 +60,51 @@ export const createAppointment = async (formData: FormData) => {
   if (!date || !patientClerkId || !specialistId)
     throw new Error("All fields are required");
 
+  const specialist = await db.specialist.findUnique({
+    where: {
+      id: Number(specialistId),
+    },
+  });
+
+  const patient = await clerkClient.users.getUser(patientClerkId as string);
+  if (!patient || !specialist)
+    throw new Error("Patient or Specialist not found");
+
   await db.appointment.create({
     data: {
-      appointmentDate: new Date(date as string),
+      meetingDate: new Date(date as string),
       type: "teleconsultation",
-      userId: patientClerkId as string,
+      patientClerkId: patient.id,
+      specialistClerkId: specialist?.userId,
+      patientName:
+        patient.fullName ??
+        patient.username ??
+        patient.emailAddresses[0]!.emailAddress,
       specialist: {
         connect: { id: Number(specialistId) },
       },
     },
   });
 
-    revalidatePath("/");
+  revalidatePath("/specialists/[id]");
+};
+
+export const confirmAppointment = async (values: {
+  meetingTime: string;
+  meetingLink: string;
+  appointmentId: number;
+}) => {
+  console.log(values);
+  await db.appointment.update({
+    where: {
+      id: values.appointmentId,
+    },
+    data: {
+      meetingTime: values.meetingTime,
+      meetingLink: values.meetingLink,
+      status: "confirmed",
+    },
+  });
+
+  revalidatePath("/appointments");
 };

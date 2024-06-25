@@ -1,6 +1,10 @@
 "use client";
-import { Ban, Check, MoreHorizontal, Trash } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Ban, Check, Loader2, MoreHorizontal, Trash } from "lucide-react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,14 +27,65 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "~/components/ui/form";
+import { confirmAppointment } from "~/lib/actions";
+import { type Roles } from "~/types/globals";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+import { useToast } from "./ui/use-toast";
+import type { Prisma } from "@prisma/client";
 
-const AppointmentCardActionButton = () => {
+const formSchema = z.object({
+  meetingLink: z.string().url(),
+  meetingTime: z.string(),
+});
+
+type Props = {
+  appointment: Prisma.AppointmentGetPayload<{
+    include: {
+      specialist: true;
+    };
+  }>;
+};
+
+const AppointmentCardActionButton = ({ appointment }: Props) => {
+  const { user } = useUser();
+
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const [validationModalOpen, setValdiationModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
+  const { toast } = useToast();
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      console.log(values);
+      await confirmAppointment({ ...values, appointmentId: appointment.id });
+
+      toast({
+        title: "Meeting Confirmer",
+        description: new Date().toDateString(),
+      });
+    } catch (err) {
+      console.log(err);
+      toast({
+        title: "Un probleme est survenu",
+        variant: "destructive",
+      });
+    }
+  }
 
   return (
     <DropdownMenu>
@@ -41,12 +96,16 @@ const AppointmentCardActionButton = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end">
-        <DropdownMenuItem
-          onClick={() => setValdiationModalOpen((prev) => !prev)}
-        >
-          <Check className="mr-2 h-4 w-4" />
-          Valider
-        </DropdownMenuItem>
+        {(user?.publicMetadata?.role as Roles) === "specialist" &&
+          appointment.status === "scheduled" && (
+            <DropdownMenuItem
+              onClick={() => setValdiationModalOpen((prev) => !prev)}
+            >
+              <Check className="mr-2 h-4 w-4" />
+              Valider
+            </DropdownMenuItem>
+          )}
+
         <DropdownMenuItem onClick={() => setCancelModalOpen((prev) => !prev)}>
           <Ban className="mr-2 h-4 w-4" />
           Annuler
@@ -67,14 +126,78 @@ const AppointmentCardActionButton = () => {
             <DialogTitle>Validation du rendez-vous</DialogTitle>
           </DialogHeader>
 
-          <div className="flex flex-col gap-4">
-            {/* https://calendar.google.com/calendar/u/0/r/eventedit?vcon=meet&dates=now&hl=en&pli=1 */}
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="meetingLink"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Lien du meeting</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Example: https://meet.google.com/qvg-tcfp-dty"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Creez un{" "}
+                      <a
+                        href="https://calendar.google.com/calendar/u/0/r/eventedit?vcon=meet&dates=now&hl=en&pli=1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 underline"
+                      >
+                        meeting google
+                      </a>
+                      , et ajoutez le lien ici
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            {/* test 
+              <FormField
+                control={form.control}
+                name="meetingTime"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Heure du meeting</FormLabel>
+                    <FormControl>
+                      <Input {...field} type="time" />
+                    </FormControl>
+                    <FormDescription>
+                      Le patient recevra un message lui informant de la
+                      confirmation du rendez-vous.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button disabled={form.formState.isSubmitting} type="submit">
+                {form.formState.isSubmitting && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Submit
+              </Button>
+            </form>
+          </Form>
+          {/* https://calendar.google.com/calendar/u/0/r/eventedit?vcon=meet&dates=now&hl=en&pli=1 */}
+
+          {/* test 
 Wednesday, June 19 · 7:08 – 7:23pm
 Time zone: Africa/Abidjan
 Google Meet joining info
 Video call link: https://meet.google.com/qvg-tcfp-dty */}
+
+          {/* <div className="flex flex-col gap-4">
+            <Label className="flex flex-col gap-2">
+              <span>Lien du meeting</span>
+              <Input
+                type="url"
+                placeholder="Example: https://meet.google.com/qvg-tcfp-dty"
+              />
+            </Label>
 
             <Label className="flex flex-col gap-2">
               <span>Heure de la rencontre</span>
@@ -86,7 +209,7 @@ Video call link: https://meet.google.com/qvg-tcfp-dty */}
             </Label>
 
             <Button>Confirmer</Button>
-          </div>
+          </div> */}
         </DialogContent>
       </Dialog>
 

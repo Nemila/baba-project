@@ -130,7 +130,9 @@ const SpecialistDetails = async ({ params }: Props) => {
                           <div className="space-y-2">
                             <p className="flex items-center gap-2">
                               <Hospital className="h-4 w-4" />
-                              <span>{adresse.location}</span>
+                              <span>
+                                {adresse?.location ?? "Aucune adresse"}
+                              </span>
                             </p>
 
                             <p className="flex items-center gap-2">
@@ -191,8 +193,7 @@ const SpecialistDetails = async ({ params }: Props) => {
 
                 <div className="flex flex-col items-center gap-2 md:flex-row">
                   <p className="text-sm">
-                    {adresse?.location ??
-                      "Aucune adresse specifie pour le moment."}
+                    {adresse?.location ?? "Aucune adresse"}
                   </p>
 
                   <span className="hidden md:block">&bull;</span>
@@ -211,7 +212,7 @@ const SpecialistDetails = async ({ params }: Props) => {
                         <div className="space-y-2">
                           <p className="flex items-center gap-2">
                             <Hospital className="h-4 w-4" />
-                            <span>{adresse.location}</span>
+                            <span>{adresse?.location ?? "Aucune adresse"}</span>
                           </p>
 
                           <p className="flex items-center gap-2">
@@ -219,20 +220,26 @@ const SpecialistDetails = async ({ params }: Props) => {
                             <span>Ouvert de 10h a 20h</span>
                           </p>
 
-                          <p className="flex items-center gap-2">
-                            <Facebook className="h-4 w-4" />
-                            <a href={socialLinks.facebook}>Facebook</a>
-                          </p>
+                          {socialLinks?.facebook && (
+                            <p className="flex items-center gap-2">
+                              <Facebook className="h-4 w-4" />
+                              <a href={socialLinks.facebook}>Facebook</a>
+                            </p>
+                          )}
 
-                          <p className="flex items-center gap-2">
-                            <Twitter className="h-4 w-4" />
-                            <a href={socialLinks.twitter}>Twitter</a>
-                          </p>
+                          {socialLinks?.twitter && (
+                            <p className="flex items-center gap-2">
+                              <Twitter className="h-4 w-4" />
+                              <a href={socialLinks.twitter}>Twitter</a>
+                            </p>
+                          )}
 
-                          <p className="flex items-center gap-2">
-                            <Instagram className="h-4 w-4" />
-                            <a href={socialLinks.instagram}>Instagram</a>
-                          </p>
+                          {socialLinks?.instagram && (
+                            <p className="flex items-center gap-2">
+                              <Instagram className="h-4 w-4" />
+                              <a href={socialLinks.instagram}>Instagram</a>
+                            </p>
+                          )}
                         </div>
                       </div>
                     </DialogContent>
