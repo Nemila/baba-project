@@ -37,10 +37,7 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import {
-  cancelAppointment,
-  confirmAppointment
-} from "~/lib/actions";
+import { cancelAppointment, confirmAppointment } from "~/lib/actions";
 import { type Roles } from "~/types/globals";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -122,12 +119,15 @@ const AppointmentCardActionButton = ({ appointment }: Props) => {
             </DropdownMenuItem>
           )}
 
-        {appointment.status === "confirmed" && (
-          <DropdownMenuItem onClick={() => setCancelModalOpen((prev) => !prev)}>
-            <Ban className="mr-2 h-4 w-4" />
-            Annuler
-          </DropdownMenuItem>
-        )}
+        {appointment.status !== "cancelled" &&
+          appointment.status !== "completed" && (
+            <DropdownMenuItem
+              onClick={() => setCancelModalOpen((prev) => !prev)}
+            >
+              <Ban className="mr-2 h-4 w-4" />
+              Annuler
+            </DropdownMenuItem>
+          )}
       </DropdownMenuContent>
 
       <Dialog
