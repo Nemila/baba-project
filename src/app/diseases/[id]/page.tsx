@@ -1,10 +1,6 @@
-import { Calendar, ExternalLink, Facebook } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 import DiseaseCard from "~/components/disease-card";
-import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
-import { Card } from "~/components/ui/card";
 import { Separator } from "~/components/ui/separator";
 
 const DiseaseDetailPage = () => {
@@ -100,54 +96,7 @@ const DiseaseDetailPage = () => {
         </div>
 
         <aside className="relative col-span-4 h-full space-y-4 border-t py-4 lg:border-l lg:border-t-0 lg:p-4">
-          <div className="space-y-2">
-            <h3 className="text-xl font-bold">Concernant l&apos;article</h3>
-
-            <Card className="flex flex-col">
-              <div className="flex items-center justify-between p-4">
-                <div className="space-y-1">
-                  <h3>Lamine Diamoutene</h3>
-                  <div className="flex items-center gap-4">
-                    <p className="text-sm">Cardiologue</p>
-                    <Badge className="rounded-lg">Auteur</Badge>
-                  </div>
-                </div>
-
-                <figure className="size-16 overflow-hidden rounded-lg">
-                  <Image
-                    alt=""
-                    width={500}
-                    height={500}
-                    src={`https://avatarfiles.alphacoders.com/375/375590.png`}
-                    className="h-full w-full object-cover"
-                  />
-                </figure>
-              </div>
-
-              <div className="flex items-center gap-4 border-t bg-gray-100 px-4 py-2">
-                <p className="flex items-center gap-2 text-sm">
-                  <Calendar className="h-4 w-4" />
-                  <span>06/15/2024</span>
-                </p>
-
-                <a
-                  href="#"
-                  className="ml-auto flex items-center gap-2 text-sm hover:underline"
-                >
-                  <Facebook className="h-4 w-4" />
-                  <span>Facebook</span>
-                </a>
-              </div>
-            </Card>
-
-            <Button asChild className="w-full" variant={"ghost"}>
-              <Link href="/specialists/1">Voir Profile</Link>
-            </Button>
-          </div>
-
           <div className="hidden flex-col space-y-2 lg:flex">
-            <Separator />
-
             <div className="space-y-2">
               <h3 className="text-xl font-bold">Racourcis</h3>
 

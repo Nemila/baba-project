@@ -20,7 +20,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { DatePicker } from "~/components/date-picker";
-import DiseaseCard from "~/components/disease-card";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
@@ -251,20 +250,9 @@ const SpecialistDetails = async ({ params }: Props) => {
 
           <div className="space-y-2 rounded-md border bg-white p-4">
             <h3 className="text-xl font-bold">Infos</h3>
-            <p className="text-sm">{specialist.description}</p>
-          </div>
-
-          <div className="space-y-2 rounded-md border bg-white p-4">
-            <h3 className="text-xl font-bold">Articles publies</h3>
-
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-              <DiseaseCard />
-              <DiseaseCard />
-              <DiseaseCard />
-              <DiseaseCard />
-              <DiseaseCard />
-              <DiseaseCard />
-            </div>
+            <p className="text-sm">
+              {specialist.description ?? "Aucune description"}
+            </p>
           </div>
 
           <div className="space-y-2 rounded-md border bg-white p-4">
