@@ -35,7 +35,7 @@ export const getMedicalDetailsPDF = async () => {
   try {
     const res = await axios.post(url, data, config);
     const pdfUrl = (res.data as { response: string }).response;
-    console.log("PDF URL:", pdfUrl);
+    console.log(pdfUrl);
     return pdfUrl;
   } catch (error) {
     console.log(error);

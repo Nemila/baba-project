@@ -8,19 +8,29 @@ datasource db {
 }
 
 model Specialist {
-    id           Int           @id @default(autoincrement())
-    experience   Int
-    userId       String        @unique
-    speciality   String
-    description  String?
-    rating       Float         @default(0)
-    appointments Appointment[]
-    createdAt    DateTime      @default(now())
-    updatedAt    DateTime      @updatedAt
+    id         Int   @id @default(autoincrement())
+    experience Int
+    rating     Float @default(0)
+
+    userId      String  @unique
+    speciality  String
+    fullName    String
+    description String?
+
+    isFeatured Boolean @default(false)
+
+    location    Json?
+    socialLinks Json?
+
+    appoitments Appointment[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
 
 enum AppointmentStatus {
     scheduled
+    confirmed
     completed
     cancelled
 }
@@ -31,15 +41,23 @@ enum AppointmentType {
 }
 
 model Appointment {
-    id              Int               @id @default(autoincrement())
-    userId          String
-    specialist      Specialist        @relation(fields: [specialistId], references: [id], onDelete: Cascade)
-    specialistId    Int
-    appointmentDate DateTime
-    status          AppointmentStatus @default(scheduled)
-    type            AppointmentType
-    createdAt       DateTime          @default(now())
-    updatedAt       DateTime          @updatedAt
+    id Int @id @default(autoincrement())
+
+    patientName       String
+    patientClerkId    String
+    specialistClerkId String
+    meetingLink       String?
+
+    status AppointmentStatus @default(scheduled)
+    type   AppointmentType
+
+    meetingDate DateTime
+    meetingTime String?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    specialist   Specialist @relation(fields: [specialistId], references: [id], onDelete: Cascade)
+    specialistId Int
 }
 
 model Disease {

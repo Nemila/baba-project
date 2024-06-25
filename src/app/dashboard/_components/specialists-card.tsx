@@ -30,6 +30,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { useToast } from "~/components/ui/use-toast";
 import { addSpecialist } from "~/lib/actions";
+import { type Roles } from "~/types/globals";
 
 const SpecialistsCard = ({ users }: { users: string }) => {
   const { toast } = useToast();
@@ -114,18 +115,22 @@ const SpecialistsCard = ({ users }: { users: string }) => {
                       <CommandList>
                         <CommandEmpty>No results found.</CommandEmpty>
                         <CommandGroup heading="Suggestions">
-                          {allUsers.map((item) => (
-                            <CommandItem
-                              key={item.id}
-                              value={item.emailAddresses[0]?.emailAddress}
-                              onSelect={(value) => {
-                                setSelectedUser(value);
-                                setUserListModalOpen(false);
-                              }}
-                            >
-                              {item.emailAddresses[0]?.emailAddress}
-                            </CommandItem>
-                          ))}
+                          {allUsers.map(
+                            (item) =>
+                              (item.publicMetadata.role as Roles) ===
+                                "specialist" && (
+                                <CommandItem
+                                  key={item.id}
+                                  value={item.emailAddresses[0]?.emailAddress}
+                                  onSelect={(value) => {
+                                    setSelectedUser(value);
+                                    setUserListModalOpen(false);
+                                  }}
+                                >
+                                  {item.emailAddresses[0]?.emailAddress}
+                                </CommandItem>
+                              ),
+                          )}
                         </CommandGroup>
                       </CommandList>
                     </Command>

@@ -1,15 +1,19 @@
 import Image from "next/image";
 import { Card } from "./ui/card";
 import Link from "next/link";
+import { type Specialist } from "@prisma/client";
+import { clerkClient } from "@clerk/nextjs/server";
 
-const SpecialistCard = async () => {
+const SpecialistCard = async ({ item }: { item: Specialist }) => {
+  const user = await clerkClient.users.getUser(item.userId);
+
   return (
-    <Link href={`/specialists/1`}>
+    <Link href={`/specialists/${item.id}`}>
       <Card>
         <div className="flex items-center justify-between p-4">
           <div>
-            <h3>Lamine Diamoutene</h3>
-            <p className="text-sm">Cardiologie</p>
+            <h3>{user.fullName}</h3>
+            <p className="text-sm">{item.speciality}</p>
           </div>
 
           <figure className="size-16 overflow-hidden rounded-md">
@@ -17,7 +21,7 @@ const SpecialistCard = async () => {
               alt=""
               width={500}
               height={500}
-              src={`https://avatarfiles.alphacoders.com/375/375590.png`}
+              src={user.imageUrl}
               className="h-full w-full object-cover"
             />
           </figure>
@@ -26,12 +30,12 @@ const SpecialistCard = async () => {
         <div className="flex justify-between border-t p-4">
           <div className="flex flex-col-reverse">
             <p className="text-sm font-medium text-gray-600">Experience</p>
-            <p className="text-sm text-gray-500">10 ans</p>
+            <p className="text-sm text-gray-500">{item.experience} ans</p>
           </div>
 
           <div className="flex flex-col-reverse">
             <p className="text-sm font-medium text-gray-600">Note</p>
-            <p className="text-sm text-gray-500">9.4 / 10</p>
+            <p className="text-sm text-gray-500">{item.rating} / 10</p>
           </div>
         </div>
       </Card>
