@@ -36,12 +36,6 @@ const AppointmentViewPage = async () => {
         {appointments.map((item) => (
           <AppointmentCard key={item.id} appointment={item} />
         ))}
-        {/* <AppointmentCard />
-        <AppointmentCard />
-        <AppointmentCard />
-        <AppointmentCard />
-        <AppointmentCard />
-        <AppointmentCard /> */}
       </div>
     </div>
   );

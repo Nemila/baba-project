@@ -108,3 +108,40 @@ export const confirmAppointment = async (values: {
 
   revalidatePath("/appointments");
 };
+
+export const cancelAppointment = async (appointmentId: number) => {
+  await db.appointment.update({
+    where: {
+      id: appointmentId,
+    },
+    data: {
+      status: "cancelled",
+    },
+  });
+
+  revalidatePath("/appointments");
+};
+
+export const deleteAppointment = async (appointmentId: number) => {
+  const appointment = await db.appointment.findUnique({
+    where: {
+      id: appointmentId,
+    },
+  });
+
+  if (
+    appointment?.status !== "cancelled" &&
+    appointment?.status !== "completed"
+  )
+    throw new Error(
+      "Appointment need to be completed or cancelled to be deleted",
+    );
+
+  await db.appointment.delete({
+    where: {
+      id: appointmentId,
+    },
+  });
+
+  revalidatePath("/appointments");
+};

@@ -1,7 +1,8 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Ban, Check, Loader2, MoreHorizontal, Trash } from "lucide-react";
+import type { Prisma } from "@prisma/client";
+import { Ban, Check, Loader2, MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -36,12 +37,14 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { confirmAppointment } from "~/lib/actions";
+import {
+  cancelAppointment,
+  confirmAppointment
+} from "~/lib/actions";
 import { type Roles } from "~/types/globals";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "./ui/use-toast";
-import type { Prisma } from "@prisma/client";
 
 const formSchema = z.object({
   meetingLink: z.string().url(),
@@ -61,7 +64,6 @@ const AppointmentCardActionButton = ({ appointment }: Props) => {
 
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const [validationModalOpen, setValdiationModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const { toast } = useToast();
 
@@ -71,7 +73,6 @@ const AppointmentCardActionButton = ({ appointment }: Props) => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(values);
       await confirmAppointment({ ...values, appointmentId: appointment.id });
 
       toast({
@@ -80,6 +81,21 @@ const AppointmentCardActionButton = ({ appointment }: Props) => {
       });
     } catch (err) {
       console.log(err);
+      toast({
+        title: "Un probleme est survenu",
+        variant: "destructive",
+      });
+    }
+  }
+
+  async function handleCancel() {
+    try {
+      await cancelAppointment(appointment.id);
+      toast({
+        title: "Consultation annulee",
+      });
+    } catch (error) {
+      console.log(error);
       toast({
         title: "Un probleme est survenu",
         variant: "destructive",
@@ -106,14 +122,12 @@ const AppointmentCardActionButton = ({ appointment }: Props) => {
             </DropdownMenuItem>
           )}
 
-        <DropdownMenuItem onClick={() => setCancelModalOpen((prev) => !prev)}>
-          <Ban className="mr-2 h-4 w-4" />
-          Annuler
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setDeleteModalOpen((prev) => !prev)}>
-          <Trash className="mr-2 h-4 w-4" />
-          Effacer
-        </DropdownMenuItem>
+        {appointment.status === "confirmed" && (
+          <DropdownMenuItem onClick={() => setCancelModalOpen((prev) => !prev)}>
+            <Ban className="mr-2 h-4 w-4" />
+            Annuler
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
 
       <Dialog
@@ -182,34 +196,6 @@ const AppointmentCardActionButton = ({ appointment }: Props) => {
               </Button>
             </form>
           </Form>
-          {/* https://calendar.google.com/calendar/u/0/r/eventedit?vcon=meet&dates=now&hl=en&pli=1 */}
-
-          {/* test 
-Wednesday, June 19 · 7:08 – 7:23pm
-Time zone: Africa/Abidjan
-Google Meet joining info
-Video call link: https://meet.google.com/qvg-tcfp-dty */}
-
-          {/* <div className="flex flex-col gap-4">
-            <Label className="flex flex-col gap-2">
-              <span>Lien du meeting</span>
-              <Input
-                type="url"
-                placeholder="Example: https://meet.google.com/qvg-tcfp-dty"
-              />
-            </Label>
-
-            <Label className="flex flex-col gap-2">
-              <span>Heure de la rencontre</span>
-              <Input type="time" />
-              <p className="text-xs font-normal">
-                Le patient recevra un message lui informant de la validation du
-                rendez-vous.
-              </p>
-            </Label>
-
-            <Button>Confirmer</Button>
-          </div> */}
         </DialogContent>
       </Dialog>
 
@@ -228,28 +214,9 @@ Video call link: https://meet.google.com/qvg-tcfp-dty */}
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Retour</AlertDialogCancel>
-            <AlertDialogAction>Je Suis Sur</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-
-      <AlertDialog
-        onOpenChange={(value) => setDeleteModalOpen(value)}
-        open={deleteModalOpen}
-        defaultOpen={false}
-      >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Etes vous absolument sur?</AlertDialogTitle>
-            <AlertDialogDescription>
-              Etes vous sur de vouloir effacer ce rendez-vous? Cette action ne
-              peut pas etre effectuee si le rendez-vous est en attente ou
-              confirme. Vous devez d&apos;abord annuler ou finir le rendez-vous.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Retour</AlertDialogCancel>
-            <AlertDialogAction>Je Suis Sur</AlertDialogAction>
+            <AlertDialogAction onClick={handleCancel}>
+              Je Suis Sur
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
