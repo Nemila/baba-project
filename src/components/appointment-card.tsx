@@ -8,11 +8,12 @@ import {
   Stethoscope,
   UserRound,
 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { getMedicalDetailsPDF } from "~/lib";
 import AppointmentCardActionButton from "./appointment-card-action-button";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
-import { useState } from "react";
 
 type AdresseType = {
   location: string | null | undefined;
@@ -32,6 +33,21 @@ const AppointmentCard = ({
   const [location] = useState<AdresseType>(
     appointment.specialist?.location as AdresseType,
   );
+
+  const [pdfDownloadLink, setPdfDownloadLink] = useState("");
+
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await getMedicalDetailsPDF();
+      console.log(res);
+      if (!res) return;
+      setPdfDownloadLink(res);
+    };
+
+    fetch().catch((err) => {
+      console.log(err);
+    });
+  }, []);
 
   return (
     <Card>
@@ -67,9 +83,11 @@ const AppointmentCard = ({
               <span>{appointment?.meetingTime ?? "Pas encore attribuer"}</span>
             </p>
 
-            <Button variant={"link"} className="mt-2 h-fit w-fit p-0" asChild>
-              <a href="#">Voir la fiche medicale</a>
-            </Button>
+            {/* <Button variant={"link"} className="mt-2 h-fit w-fit p-0" asChild>
+              <a href={pdfDownloadLink} download>
+                Voir la fiche medicale
+              </a>
+            </Button> */}
           </div>
         </div>
       </CardContent>
