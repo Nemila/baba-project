@@ -45,3 +45,25 @@ export const editSpecialistProfile = async (
     },
   });
 };
+
+export const createAppointment = async (formData: FormData) => {
+  const date = formData.get("date");
+  const patientClerkId = formData.get("patientClerkId");
+  const specialistId = formData.get("specialistId");
+
+  if (!date || !patientClerkId || !specialistId)
+    throw new Error("All fields are required");
+
+  await db.appointment.create({
+    data: {
+      appointmentDate: new Date(date as string),
+      type: "teleconsultation",
+      userId: patientClerkId as string,
+      specialist: {
+        connect: { id: Number(specialistId) },
+      },
+    },
+  });
+
+    revalidatePath("/");
+};

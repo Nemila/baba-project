@@ -40,6 +40,7 @@ import {
 import { Label } from "~/components/ui/label";
 import { Separator } from "~/components/ui/separator";
 import { Textarea } from "~/components/ui/textarea";
+import { createAppointment } from "~/lib/actions";
 import { db } from "~/server/db";
 
 type Props = {
@@ -104,35 +105,79 @@ const SpecialistDetails = async ({ params }: Props) => {
                   />
                 </figure>
 
-                <div className="ml-auto flex flex-col gap-2 md:flex-row">
-                  <Dialog>
-                    {connectedUser?.id !== user.id && (
-                      <DialogTrigger asChild>
-                        <Button>
-                          <Calendar className="mr-2 h-4 w-4" />
-                          Rencontrer
-                        </Button>
-                      </DialogTrigger>
+                {connectedUser && (
+                  <div className="ml-auto flex flex-col gap-2 md:flex-row">
+                    <Dialog>
+                      {connectedUser?.id !== user.id && (
+                        <DialogTrigger asChild>
+                          <Button>
+                            <Calendar className="mr-2 h-4 w-4" />
+                            Rencontrer
+                          </Button>
+                        </DialogTrigger>
+                      )}
+
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Organiser un rendez-vous</DialogTitle>
+                        </DialogHeader>
+
+                        {/* RESERVATION FORM */}
+                        <form
+                          className="flex flex-col gap-4"
+                          action={createAppointment}
+                        >
+                          <div className="space-y-2">
+                            <p className="flex items-center gap-2">
+                              <Hospital className="h-4 w-4" />
+                              <span>{adresse.location}</span>
+                            </p>
+
+                            <p className="flex items-center gap-2">
+                              <Clock className="h-4 w-4" />
+                              <span>Ouvert de 10h a 20h</span>
+                            </p>
+
+                            <p className="flex items-center gap-2">
+                              <UserRound className="h-4 w-4" />
+                              <span>{user.fullName ?? user.username}</span>
+                            </p>
+                          </div>
+
+                          <Label className="flex flex-col gap-2">
+                            <span>Date de rendez-vous</span>
+                            <DatePicker />
+                          </Label>
+
+                          <input
+                            type="hidden"
+                            contentEditable={false}
+                            name="specialistId"
+                            value={specialist.id}
+                          />
+
+                          <input
+                            type="hidden"
+                            contentEditable={false}
+                            name="patientClerkId"
+                            value={connectedUser.id}
+                          />
+
+                          <Button type="submit">Valider</Button>
+                        </form>
+                      </DialogContent>
+                    </Dialog>
+
+                    {connectedUser.id === user.id && (
+                      <Button asChild>
+                        <Link href={`/specialists/edit`}>
+                          <Edit className="mr-2 h-4 w-4" />
+                          Editer
+                        </Link>
+                      </Button>
                     )}
-
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Organiser un rendez-vous</DialogTitle>
-                      </DialogHeader>
-
-                      <ReservationForm />
-                    </DialogContent>
-                  </Dialog>
-
-                  {connectedUser?.id === user.id && (
-                    <Button asChild>
-                      <Link href={`/specialists/edit`}>
-                        <Edit className="mr-2 h-4 w-4" />
-                        Editer
-                      </Link>
-                    </Button>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
 
               <div className="space-y-4">
@@ -312,36 +357,6 @@ const Comment = () => {
         </div>
       </div>
     </div>
-  );
-};
-
-const ReservationForm = () => {
-  return (
-    <form className="flex flex-col gap-4">
-      <div className="space-y-2">
-        <p className="flex items-center gap-2">
-          <Hospital className="h-4 w-4" />
-          <span>Seattle, Washington, États-Unis</span>
-        </p>
-
-        <p className="flex items-center gap-2">
-          <Clock className="h-4 w-4" />
-          <span>Ouvert de 10h a 20h</span>
-        </p>
-
-        <p className="flex items-center gap-2">
-          <UserRound className="h-4 w-4" />
-          <span>Lamine Diamoutene</span>
-        </p>
-      </div>
-
-      <Label className="flex flex-col gap-2">
-        <span>Date de rendez-vous</span>
-        <DatePicker />
-      </Label>
-
-      <Button>Valider</Button>
-    </form>
   );
 };
 
