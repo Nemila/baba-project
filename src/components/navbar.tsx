@@ -6,18 +6,11 @@ import {
   SignedOut,
   useUser,
 } from "@clerk/nextjs";
-import { Bell, CheckCheck, PanelRight, UserRound } from "lucide-react";
+import { PanelRight, UserRound } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "~/components/ui/popover";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
-import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
-import { Separator } from "./ui/separator";
 
 const navLinks = [
   {
@@ -74,7 +67,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center justify-center gap-2">
-          <Popover>
+          {/* <Popover>
             <PopoverTrigger asChild>
               <Button size={"icon"} variant={"outline"}>
                 <Bell className="h-4 w-4" />
@@ -98,7 +91,7 @@ const Navbar = () => {
                 <NotificationMessage />
               </div>
             </PopoverContent>
-          </Popover>
+          </Popover> */}
 
           <Button asChild variant={"outline"} size={"icon"}>
             <Link href="/medical-details">
@@ -139,21 +132,21 @@ const Navbar = () => {
   );
 };
 
-const NotificationMessage = () => {
-  return (
-    <Link
-      href={"/"}
-      className="flex flex-col items-start gap-2 rounded-md  p-2 hover:border hover:bg-muted/40"
-    >
-      <Badge className="text-xs"></Badge>
-      <p className="line-clamp-2 text-xs">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
-        placeat deleniti quaerat expedita laboriosam, natus perferendis, soluta
-        voluptates nesciunt obcaecati dolorem itaque nemo. Fugit quos vitae,
-        error itaque quis neque?
-      </p>
-    </Link>
-  );
-};
+// const NotificationMessage = () => {
+//   return (
+//     <Link
+//       href={"/"}
+//       className="flex flex-col items-start gap-2 rounded-md  p-2 hover:border hover:bg-muted/40"
+//     >
+//       <Badge className="text-xs"></Badge>
+//       <p className="line-clamp-2 text-xs">
+//         Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+//         placeat deleniti quaerat expedita laboriosam, natus perferendis, soluta
+//         voluptates nesciunt obcaecati dolorem itaque nemo. Fugit quos vitae,
+//         error itaque quis neque?
+//       </p>
+//     </Link>
+//   );
+// };
 
 export default Navbar;

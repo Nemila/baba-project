@@ -17,7 +17,6 @@
     "email-dev": "email dev"
   },
   "dependencies": {
-    "@clerk/elements": "^0.7.0",
     "@clerk/nextjs": "^5.0.8",
     "@hookform/resolvers": "^3.6.0",
     "@prisma/client": "^5.14.0",
