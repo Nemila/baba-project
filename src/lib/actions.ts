@@ -5,13 +5,17 @@ import { revalidatePath } from "next/cache";
 import { type IEditSpecialistProfile } from "~/app/specialists/edit/page";
 import { db } from "~/server/db";
 import type { Roles } from "~/types/globals";
+import { checkRole } from "./utils";
 
 export const setUserRole = async (userId: string, role: Roles) => {
+  if (!checkRole("admin")) throw new Error("Not authorized");
+
   await clerkClient.users.updateUserMetadata(userId, {
     publicMetadata: {
       role: role,
     },
   });
+
   revalidatePath("/dashboard");
 };
 
@@ -20,6 +24,7 @@ export const addSpecialist = async (data: {
   speciality: string;
   experience: number;
 }) => {
+  if (!checkRole("admin")) throw new Error("Not authorized");
   const user = await clerkClient.users.getUser(data.userId);
 
   await db.specialist.create({
@@ -123,6 +128,8 @@ export const cancelAppointment = async (appointmentId: number) => {
 };
 
 export const deleteAppointment = async (appointmentId: number) => {
+  if (!checkRole("admin")) throw new Error("Not authorized");
+
   const appointment = await db.appointment.findUnique({
     where: {
       id: appointmentId,
