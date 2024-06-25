@@ -2,8 +2,11 @@ import { Search } from "lucide-react";
 import SpecialistCard from "~/components/specialist-card";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
+import { db } from "~/server/db";
 
 const SpecialistsPage = async () => {
+  const specialist = await db.specialist.findMany();
+
   return (
     <div className="container flex flex-1 flex-col gap-6 px-4 py-8">
       <div className="flex flex-col gap-4 md:flex-row">
@@ -29,15 +32,9 @@ const SpecialistsPage = async () => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <SpecialistCard />
-        <SpecialistCard />
-        <SpecialistCard />
-        <SpecialistCard />
-        <SpecialistCard />
-        <SpecialistCard />
-        <SpecialistCard />
-        <SpecialistCard />
-        <SpecialistCard />
+        {specialist.map((item) => (
+          <SpecialistCard key={item.id} item={item} />
+        ))}
       </div>
     </div>
   );
