@@ -13,11 +13,7 @@ import {
 } from "~/components/ui/popover";
 import { CalendarDays } from "lucide-react";
 
-type Props = {
-  limit?: boolean;
-};
-
-export function DatePicker({ limit = true }: Props) {
+export function DatePicker({ limit = true }: { limit?: boolean }) {
   const [date, setDate] = React.useState<Date>();
 
   return (
