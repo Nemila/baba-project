@@ -8,8 +8,7 @@ import {
   Stethoscope,
   UserRound,
 } from "lucide-react";
-import { useEffect, useState } from "react";
-import { getMedicalDetailsPDF } from "~/lib";
+import { useState } from "react";
 import AppointmentCardActionButton from "./appointment-card-action-button";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
@@ -33,21 +32,6 @@ const AppointmentCard = ({
   const [location] = useState<AdresseType>(
     appointment.specialist?.location as AdresseType,
   );
-
-  const [pdfDownloadLink, setPdfDownloadLink] = useState("");
-
-  useEffect(() => {
-    const fetch = async () => {
-      const res = await getMedicalDetailsPDF();
-      console.log(res);
-      if (!res) return;
-      setPdfDownloadLink(res);
-    };
-
-    fetch().catch((err) => {
-      console.log(err);
-    });
-  }, []);
 
   return (
     <Card>
