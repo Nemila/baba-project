@@ -13,6 +13,7 @@ import AppointmentCardActionButton from "./appointment-card-action-button";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
+import Link from "next/link";
 
 type AdresseType = {
   location: string | null | undefined;
@@ -67,11 +68,14 @@ const AppointmentCard = ({
               <span>{appointment?.meetingTime ?? "Pas encore attribuer"}</span>
             </p>
 
-            {/* <Button variant={"link"} className="mt-2 h-fit w-fit p-0" asChild>
-              <a href={pdfDownloadLink} download>
+            <Button variant={"link"} className="mt-2 h-fit w-fit p-0" asChild>
+              <Link
+                href={`/medical-details/${appointment.patientClerkId}`}
+                download
+              >
                 Voir la fiche medicale
-              </a>
-            </Button> */}
+              </Link>
+            </Button>
           </div>
         </div>
       </CardContent>

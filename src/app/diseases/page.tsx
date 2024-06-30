@@ -47,14 +47,16 @@ const DiseasesPage = async () => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <DiseaseCard />
-        <DiseaseCard />
-        <DiseaseCard />
-        <DiseaseCard />
-        <DiseaseCard />
-        <DiseaseCard />
-        <DiseaseCard />
-        <DiseaseCard />
+        <DiseaseCard
+          href="meningite"
+          description="La méningite est une infection des méninges, les membranes entourant le cerveau et la moelle épinière. Elle peut être causée par des virus, des bactéries ou des champignons."
+          danger="Tres Dangereux"
+        />
+        <DiseaseCard
+          href="corona"
+          description="La COVID-19 est une infection respiratoire provoquée par le coronavirus SARS-CoV-2, apparu en Chine à partir de chauve-souris infectées. Les symptômes incluent fatigue, fièvre, toux, difficultés respiratoires, ainsi que des symptômes non spécifiques comme courbatures, mal de gorge, et parfois des troubles gastro-intestinaux. Les formes sévères peuvent entraîner des complications respiratoires graves nécessitant une hospitalisation, voire une assistance respiratoire."
+          danger="Tres Dangereux"
+        />
       </div>
     </div>
   );

@@ -98,3 +98,28 @@ model Facilities {
     createdAt DateTime     @default(now())
     updatedAt DateTime     @updatedAt
 }
+
+enum Genre {
+    MASCULIN
+    FEMININ
+}
+
+model MedicalDetails {
+    id             Int       @id @default(autoincrement())
+    patientClerkId String    @unique
+    patientName    String?
+    phoneNumber    String?
+    dateOfBirth    DateTime?
+    genre          Genre?
+    bloodGroup     String?
+
+    hasAllergies         Boolean?
+    allergies            String?
+    hasChronicConditions Boolean?
+    chronicConditions    String?
+
+    isSmoker       Boolean?
+    isDrinker      Boolean?
+    isSportman     Boolean?
+    wasHopitalized Boolean?
+}

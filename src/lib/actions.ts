@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
-import { clerkClient } from "@clerk/nextjs/server";
+import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { type IEditSpecialistProfile } from "~/app/specialists/edit/page";
 import { db } from "~/server/db";
@@ -151,4 +153,25 @@ export const deleteAppointment = async (appointmentId: number) => {
   });
 
   revalidatePath("/appointments");
+};
+
+export const updateMedicalDetails = async (data: any) => {
+  const user = await currentUser();
+  if (!user) throw new Error("Not Authorized");
+
+  await db.medicalDetails.upsert({
+    where: {
+      patientClerkId: user.id,
+    },
+    create: {
+      patientClerkId: user.id,
+      patientName: user.fullName,
+      ...data,
+    },
+    update: {
+      ...data,
+    },
+  });
+
+  console.log(data);
 };

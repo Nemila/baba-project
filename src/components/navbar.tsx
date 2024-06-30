@@ -6,7 +6,7 @@ import {
   SignedOut,
   useUser,
 } from "@clerk/nextjs";
-import { PanelRight, UserRound } from "lucide-react";
+import { Cog, File, PanelRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
@@ -94,8 +94,14 @@ const Navbar = () => {
           </Popover> */}
 
           <Button asChild variant={"outline"} size={"icon"}>
-            <Link href="/medical-details">
-              <UserRound className="h-4 w-4" />
+            <Link href="/medical-details/update">
+              <Cog className="h-4 w-4" />
+            </Link>
+          </Button>
+
+          <Button asChild variant={"outline"} size={"icon"}>
+            <Link href={`/medical-details/${user?.id}`}>
+              <File className="h-4 w-4" />
             </Link>
           </Button>
 

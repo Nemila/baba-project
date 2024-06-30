@@ -50,11 +50,9 @@ const UsersTable = ({ users }: { users: string }) => {
               <TableHead>Utilisateur</TableHead>
               <TableHead>Role</TableHead>
               <TableHead className="hidden sm:table-cell">
-                Nom Complet
+                Nom D&apos;utilisateur
               </TableHead>
-              <TableHead className="hidden sm:table-cell">
-                Numero de telephone
-              </TableHead>
+
               <TableHead className="text-right">Action</TableHead>
             </TableRow>
           </TableHeader>
@@ -95,7 +93,9 @@ const UserRow = ({ item }: { item: User }) => {
   return (
     <TableRow>
       <TableCell>
-        <div className="font-medium">{item.username}</div>
+        <div className="font-medium">
+          {item.firstName} {item.lastName}
+        </div>
         <div className="hidden text-sm text-muted-foreground md:inline">
           {item.emailAddresses[0]?.emailAddress}
         </div>
@@ -103,12 +103,8 @@ const UserRow = ({ item }: { item: User }) => {
 
       <TableCell>{(item.publicMetadata?.role as string) ?? "user"}</TableCell>
 
-      <TableCell className="hidden sm:table-cell">
-        {item.fullName ?? "N/A"}
-      </TableCell>
-
-      <TableCell className="hidden sm:table-cell">
-        {item.phoneNumbers[0]?.phoneNumber ?? "N/A"}
+      <TableCell className="hidden capitalize sm:table-cell">
+        {item.username ?? "N/A"}
       </TableCell>
 
       <TableCell className="text-right">
