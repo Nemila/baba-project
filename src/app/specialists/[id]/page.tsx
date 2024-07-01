@@ -19,7 +19,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { DatePicker } from "~/components/date-picker";
+import ReservationForm from "~/components/reservation-form";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
@@ -36,10 +36,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { Label } from "~/components/ui/label";
 import { Separator } from "~/components/ui/separator";
 import { Textarea } from "~/components/ui/textarea";
-import { createAppointment } from "~/lib/actions";
 import { db } from "~/server/db";
 
 type Props = {
@@ -121,10 +119,9 @@ const SpecialistDetails = async ({ params }: Props) => {
                           <DialogTitle>Organiser un rendez-vous</DialogTitle>
                         </DialogHeader>
 
-                        {/* RESERVATION FORM */}
-                        <form
-                          className="flex flex-col gap-4"
-                          action={createAppointment}
+                        <ReservationForm
+                          specialistId={specialist.id}
+                          patientClerkId={connectedUser.id}
                         >
                           <div className="space-y-2">
                             <p className="flex items-center gap-2">
@@ -144,28 +141,7 @@ const SpecialistDetails = async ({ params }: Props) => {
                               <span>{user.fullName ?? user.username}</span>
                             </p>
                           </div>
-
-                          <Label className="flex flex-col gap-2">
-                            <span>Date de rendez-vous</span>
-                            <DatePicker />
-                          </Label>
-
-                          <input
-                            type="hidden"
-                            contentEditable={false}
-                            name="specialistId"
-                            value={specialist.id}
-                          />
-
-                          <input
-                            type="hidden"
-                            contentEditable={false}
-                            name="patientClerkId"
-                            value={connectedUser.id}
-                          />
-
-                          <Button type="submit">Valider</Button>
-                        </form>
+                        </ReservationForm>
                       </DialogContent>
                     </Dialog>
 
@@ -186,7 +162,7 @@ const SpecialistDetails = async ({ params }: Props) => {
                   <h3 className="text-2xl font-bold">
                     {user.fullName ?? user.username}
                   </h3>
-                  <p>Specialite {specialist.speciality}</p>
+                  <p>Spécialite {specialist.speciality}</p>
                   {specialist.isFeatured && <Badge>Featured</Badge>}
                 </div>
 
@@ -199,12 +175,12 @@ const SpecialistDetails = async ({ params }: Props) => {
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button variant={"link"} className="h-fit p-0">
-                        Voir les coordonnees
+                        Voir les coordonnées.
                       </Button>
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>
-                        <DialogTitle>Coordonees du specialiste</DialogTitle>
+                        <DialogTitle>Coordonées du specialiste</DialogTitle>
                       </DialogHeader>
 
                       <div className="flex flex-col gap-4">
@@ -251,7 +227,7 @@ const SpecialistDetails = async ({ params }: Props) => {
           <div className="space-y-2 rounded-md border bg-white p-4">
             <h3 className="text-xl font-bold">Infos</h3>
             <p className="text-sm">
-              {specialist.description ?? "Aucune description"}
+              {specialist.description ?? "Aucune description."}
             </p>
           </div>
 
@@ -261,7 +237,7 @@ const SpecialistDetails = async ({ params }: Props) => {
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-medium">109 Commentaires</h3>
+                  <h3 className="text-lg font-medium">4 Commentaires</h3>
 
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -326,12 +302,10 @@ const Comment = () => {
       </Avatar>
 
       <div className="flex-1 space-y-1">
-        <h3 className="font-bold">Lamine Diamoutene</h3>
+        <h3 className="font-bold">Baba Ag</h3>
         <p className="text-sm">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-          exercitationem animi deserunt quod. Enim voluptates in labore
-          pariatur? Quisquam corporis modi a minima, odio obcaecati. Ullam natus
-          sapiente quas officia.
+          Après le rendez-vous avec le cardiologue, je suis satisfait de ses
+          explications et je me sens rassuré quant à ma santé cardiaque.
         </p>
 
         <div className="flex">
@@ -381,7 +355,7 @@ const SimilarSpecialists = async ({ userId }: { userId: number }) => {
               </>
             ))
           ) : (
-            <p className="p-4">Aucun specialist pour le moment </p>
+            <p className="p-4">Aucun spécialiste pour le moment.</p>
           )}
         </div>
 

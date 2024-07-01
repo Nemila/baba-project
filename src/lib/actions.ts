@@ -59,11 +59,15 @@ export const editSpecialistProfile = async (
   });
 };
 
-export const createAppointment = async (formData: FormData) => {
-  const date = formData.get("date");
-  const patientClerkId = formData.get("patientClerkId");
-  const specialistId = formData.get("specialistId");
-
+export const createAppointment = async ({
+  date,
+  patientClerkId,
+  specialistId,
+}: {
+  date: Date;
+  patientClerkId: string;
+  specialistId: number;
+}) => {
   if (!date || !patientClerkId || !specialistId)
     throw new Error("All fields are required");
 
@@ -73,13 +77,13 @@ export const createAppointment = async (formData: FormData) => {
     },
   });
 
-  const patient = await clerkClient.users.getUser(patientClerkId as string);
+  const patient = await clerkClient.users.getUser(patientClerkId);
   if (!patient || !specialist)
     throw new Error("Patient or Specialist not found");
 
   await db.appointment.create({
     data: {
-      meetingDate: new Date(date as string),
+      meetingDate: date,
       type: "teleconsultation",
       patientClerkId: patient.id,
       specialistClerkId: specialist?.userId,

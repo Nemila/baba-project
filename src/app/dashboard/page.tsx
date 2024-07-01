@@ -13,7 +13,7 @@ import UsersTable from "~/components/users-table";
 import SpecialistsCard from "./_components/specialists-card";
 
 const Dashboard = async () => {
-  const users = await clerkClient.users.getUserList();
+  const users = await clerkClient.users.getUserList({ limit: 500 });
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -28,7 +28,7 @@ const Dashboard = async () => {
 
               <Card x-chunk="dashboard-05-chunk-2">
                 <CardHeader className="pb-2">
-                  <CardDescription>Maladies repertories</CardDescription>
+                  <CardDescription>Maladies répertoriées</CardDescription>
                   <CardTitle className="text-4xl">5000</CardTitle>
                 </CardHeader>
                 <CardFooter className="flex gap-2">
@@ -41,7 +41,7 @@ const Dashboard = async () => {
               <Card>
                 <CardHeader className="pb-2">
                   <UserRound className="h-8 w-8" />
-                  <CardDescription>Total utilisateurs</CardDescription>
+                  <CardDescription>Utilisateurs totaux</CardDescription>
                   <CardTitle className="text-4xl">500</CardTitle>
                 </CardHeader>
               </Card>

@@ -75,7 +75,7 @@ const SpecialistsCard = ({ users }: { users: string }) => {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardDescription>Total Specialist</CardDescription>
+        <CardDescription>Spécialistes Totaux</CardDescription>
         <CardTitle className="text-4xl">200</CardTitle>
       </CardHeader>
       <CardFooter className="flex gap-2">
@@ -93,7 +93,7 @@ const SpecialistsCard = ({ users }: { users: string }) => {
             <DialogHeader>
               <DialogTitle>Ajouter un docteur</DialogTitle>
               <DialogDescription>
-                Le docteur doit avoir un compte afin d&apos;etre ajouter
+                Le docteur doit avoir un compte afin d&apos;etre ajouté.
               </DialogDescription>
 
               <div className="flex flex-col gap-2">

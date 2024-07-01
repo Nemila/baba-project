@@ -29,7 +29,7 @@ const AppointmentViewPage = async () => {
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
           Gestion des Consultations
         </h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <p>Toutes vos consultations sont affichées ici.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">

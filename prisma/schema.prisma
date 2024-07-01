@@ -58,6 +58,8 @@ model Appointment {
 
     specialist   Specialist @relation(fields: [specialistId], references: [id], onDelete: Cascade)
     specialistId Int
+
+    @@unique([specialistClerkId, patientClerkId, meetingDate])
 }
 
 model Disease {

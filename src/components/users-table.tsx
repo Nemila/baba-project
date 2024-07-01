@@ -48,7 +48,7 @@ const UsersTable = ({ users }: { users: string }) => {
           <TableHeader>
             <TableRow>
               <TableHead>Utilisateur</TableHead>
-              <TableHead>Role</TableHead>
+              <TableHead>Type d&apos;utilisateur</TableHead>
               <TableHead className="hidden sm:table-cell">
                 Nom D&apos;utilisateur
               </TableHead>
@@ -78,14 +78,14 @@ const UserRow = ({ item }: { item: User }) => {
     try {
       await setUserRole(userId, role);
       toast({
-        title: "Role change avec succes",
+        title: "Done",
       });
       setIsLoading(false);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
       toast({
-        title: "Un probleme est survenu",
+        title: "Something went wrong",
         variant: "destructive",
       });
     }
@@ -119,7 +119,7 @@ const UserRow = ({ item }: { item: User }) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel>Changer Role</DropdownMenuLabel>
+            <DropdownMenuLabel>Changer de type</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={async () => await handleRoleChange(item.id, "admin")}
             >
@@ -130,7 +130,7 @@ const UserRow = ({ item }: { item: User }) => {
                 await handleRoleChange(item.id, "specialist")
               }
             >
-              Specialist
+              Spécialiste
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={async () => await handleRoleChange(item.id, "user")}

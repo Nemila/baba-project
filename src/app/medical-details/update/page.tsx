@@ -51,7 +51,7 @@ const MedicalDetailsPage = () => {
       <div className="mx-auto flex max-w-[1000px] flex-col gap-8 overflow-hidden rounded-md border bg-white p-6">
         <div>
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-            Fiche Medicale
+            Fiche Médicale
           </h1>
           <p className="leading-7 [&:not(:first-child)]:mt-2">
             Les docteurs utiliseront les informations que vous aurez renseigne
@@ -64,7 +64,7 @@ const MedicalDetailsPage = () => {
           formSchema={formSchema}
           fieldConfig={{
             phoneNumber: {
-              label: "Numero de telephone",
+              label: "Numero de téléphone",
               inputProps: {
                 placeholder: "Ex: 79153505",
               },
@@ -79,7 +79,7 @@ const MedicalDetailsPage = () => {
 
             hasAllergies: {
               fieldType: "switch",
-              label: "Avez vous des allergies?",
+              label: "Avez-vous des allergies ?",
             },
             allergies: {
               label: "Decrivez vos allergies",
@@ -87,7 +87,7 @@ const MedicalDetailsPage = () => {
             },
             hasChronicConditions: {
               fieldType: "switch",
-              label: "Avez vous des conditions chroniques?",
+              label: "Avez-vous des conditions chroniques ?",
             },
             chronicConditions: {
               label: "Decrivez vos conditions chroniques",
@@ -95,16 +95,16 @@ const MedicalDetailsPage = () => {
             },
 
             isSmoker: {
-              label: "Etes vous un fumeur?",
+              label: "Etes-vous un fumeur ?",
             },
             isDrinker: {
-              label: "Etes vous un buveur?",
+              label: "Etes-vous un buveur ?",
             },
             isSportman: {
-              label: "Faites vous du sport?",
+              label: "Faites-vous du sport ?",
             },
             wasHopitalized: {
-              label: "Avez-vous deja ete hospitaliser",
+              label: "Avez-vous déja été hospitalisé(e) ?",
             },
 
             bloodGroup: {

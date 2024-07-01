@@ -17,7 +17,7 @@ const SpecialistsPage = async () => {
         <Input
           type="number"
           min={1}
-          placeholder="Annees d'experience min"
+          placeholder="Années d'experience"
           className="flex-1"
         />
         <Input type="number" min={1} placeholder="Note" className="flex-1" />
@@ -26,9 +26,9 @@ const SpecialistsPage = async () => {
 
       <div>
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-          Liste des specialists
+          Liste des spécialistes
         </h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <p>Retrouvez ici des spécialistes de santé qui pourront vous aider.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
