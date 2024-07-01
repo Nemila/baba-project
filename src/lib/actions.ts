@@ -27,6 +27,9 @@ export const addSpecialist = async (data: {
   experience: number;
 }) => {
   if (!checkRole("admin")) throw new Error("Not authorized");
+  if (!data.experience || !data.experience || !data.experience)
+    throw new Error("Not authorized");
+
   const user = await clerkClient.users.getUser(data.userId);
 
   await db.specialist.create({

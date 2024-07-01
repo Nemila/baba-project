@@ -111,7 +111,10 @@ const SpecialistsCard = ({ users }: { users: string }) => {
 
                   <DialogContent>
                     <Command>
-                      <CommandInput placeholder="Type a command or search..." />
+                      <CommandInput
+                        required
+                        placeholder="Type a command or search..."
+                      />
                       <CommandList>
                         <CommandEmpty>No results found.</CommandEmpty>
                         <CommandGroup heading="Suggestions">
@@ -138,12 +141,14 @@ const SpecialistsCard = ({ users }: { users: string }) => {
                 </Dialog>
 
                 <Input
+                  required
                   placeholder="Specialite"
                   value={speciality}
                   onChange={(e) => setSpeciality(e.currentTarget.value)}
                 />
 
                 <Input
+                  required
                   type="number"
                   placeholder="Experience"
                   value={experience}
